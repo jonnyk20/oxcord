@@ -1,4 +1,4 @@
-<!--The whole content below can be removed with the new code.-->
+<!--We Made it.-->
 <div style="text-align:center">
   <h1>
     Welcome to {{title}}!!
@@ -21,7 +21,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let song of songs | filter:term| sortBy: 'likes'; let i  = index">
+      <tr *ngFor="let song of songs |  sortBy: 'likes'; let i  = index">
         <td>{{song.title}}</td>
         <td>{{song.artist}}</td>
         <td>{{song.likes}} 
@@ -35,4 +35,4 @@
       </tr>
     </tbody>
   </table>
-<!--| sortBy: 'likes'; let i  = index  -->
+<!--filter:term|  -->
