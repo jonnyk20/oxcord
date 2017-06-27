@@ -10,7 +10,11 @@ import { Pipe, PipeTransform } from '@angular/core';
 
 
 export class FilterPipe implements PipeTransform {
-    transform(items: any[], args: any[]): any {
-        return items.filter(item => item.id.indexOf(args[0]) !== -1);
+    transform(items: any[], term): any {
+        console.log('term', term);
+      
+        return term 
+            ? items.filter(item => item.title.toLocaleLowerCase().indexOf(term.toLocaleLowerCase()) !== -1 ||item.artist.toLocaleLowerCase().indexOf(term.toLocaleLowerCase()) !== -1)
+            : items;
     }
 }

@@ -21,7 +21,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let song of songs |  sortBy: 'likes'; let i  = index">
+      <tr *ngFor="let song of songs|  sortBy: 'likes' |  filter : term; let i  = index">
         <td>{{song.title}}</td>
         <td>{{song.artist}}</td>
         <td>{{song.likes}} 
@@ -36,3 +36,4 @@
     </tbody>
   </table>
 <!--filter:term|  -->
+<!--<tr *ngFor="let song of songs |  sortBy: 'likes'; let i  = index">-->
