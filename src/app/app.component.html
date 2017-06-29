@@ -46,9 +46,14 @@
 </ul>
 -->
 <div> TEST </div>
- <h1>{{ (testobject| async)?.name }}</h1>
+<ul>
+<li *ngFor="let track of Songz | async">
+    {{ track.title }}
+</li>
+</ul>
+ <!--
  <input type="text" #newname placeholder="Name" />
 <button (click)="save(newname.value)">Set Name</button>
-
+-->
 
 

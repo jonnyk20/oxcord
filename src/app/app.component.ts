@@ -19,15 +19,15 @@ export class AppComponent {
   }
   */
 
-  testobject: FirebaseObjectObservable<any>;
+  Songz: FirebaseObjectObservable<any>;
    constructor(db: AngularFireDatabase) {
-    this.testobject = db.object('/testobject');
+    this.Songz = db.object('/Songz');
   }
-
+/*
 save(newName: string) {
     this.testobject.update({ name: newName });
   }
-
+*/
 
 
 
