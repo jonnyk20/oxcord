@@ -4,5 +4,15 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  firebase: {
+ apiKey: "AIzaSyAb-lzjY-yNaMJf66lgVsmwPQwmPoB2OqQ",
+    authDomain: "oxcord-f9409.firebaseapp.com",
+    databaseURL: "https://oxcord-f9409.firebaseio.com",
+    projectId: "oxcord-f9409",
+    storageBucket: "oxcord-f9409.appspot.com",
+    messagingSenderId: "59735310768"
+  }
+  
 };
+

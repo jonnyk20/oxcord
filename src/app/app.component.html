@@ -35,5 +35,20 @@
       </tr>
     </tbody>
   </table>
-<!--filter:term|  -->
-<!--<tr *ngFor="let song of songs |  sortBy: 'likes'; let i  = index">-->
+<!-- TEST -->
+<!--
+<ul>
+    <li *ngFor="let item of items | async">
+        {{item.$key}} {{item.$value}}
+    
+    </li>
+    
+</ul>
+-->
+<div> TEST </div>
+ <h1>{{ (testobject| async)?.name }}</h1>
+ <input type="text" #newname placeholder="Name" />
+<button (click)="save(newname.value)">Set Name</button>
+
+
+
