@@ -1,19 +1,22 @@
 <!--We Made it.-->
 <div style="text-align:center">
   <h1>
-    Welcome to {{title}}!!
+    Welcome to {{title}}
   </h1>
   
-</div>
-<h2>Choose your favorite song: </h2>
+<div class="row" *ngFor="let song of songs | async "> 
 
-
-
-
-<div>  
-
+  <div class="col-md-12" *ngIf="song.np == true">
+  <h4>Now Playing: "{{song.title}}" - {{song.artist}}</h4>
+  </div>
  
 </div>
+
+
+</div>
+<h3>Tonight's Songs: </h3>
+
+
 <table class="table">
     <thead>
       <tr>
@@ -23,7 +26,11 @@
       </tr>
     </thead>
     <tbody>
-  <tr *ngFor="let song of songs | async |  sortBy: 'likes'  ; let i  = index">
+  <tr *ngFor="let song of songs | async |  sortBy: 'likes' ; let i  = index"
+[style.background]="song.np == true ? 'lightblue': 'white'"
+
+  >
+
 <td>{{ song.title }}</td>
 <td>{{ song.artist }}</td>
 <td>{{ song.likes }}
@@ -33,6 +40,7 @@
 <i class="fa fa-plus" aria-hidden="true" (click)="addLike(song.$key, song.likes)"  ></i>
 <i class="fa fa-minus" aria-hidden="true" (click)="removeLike(song.$key, song.likes)"></i>
 </td>
+
   </tr>
   </tbody>
   </table>
