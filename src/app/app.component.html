@@ -1,22 +1,22 @@
 <!--We Made it.-->
 <div style="text-align:center">
   <h1>
-    Welcome to {{title}}!!
+    Welcome to {{title}}
   </h1>
   
+<div class="row" *ngFor="let song of songs | async "> 
+
+  <div class="col-md-12" *ngIf="song.np == true">
+  <h4>Now Playing: "{{song.title}}" - {{song.artist}}</h4>
+  </div>
+ 
 </div>
-<h2>Please choose your favorite song: </h2>
 
 
-
-
-<div>  
-
-  <form id="filter">
-    <label>Filter people by name:</label>
-    <input type="text" name="term" [(ngModel)]="term" />
-</form>
 </div>
+<h3>Tonight's Songs: </h3>
+
+
 <table class="table">
     <thead>
       <tr>
@@ -26,7 +26,11 @@
       </tr>
     </thead>
     <tbody>
-  <tr *ngFor="let song of songs | async |  sortBy: 'likes'  |  filter : term; let i  = index">
+  <tr *ngFor="let song of songs | async |  sortBy: 'likes' ; let i  = index"
+[style.background]="song.np == true ? 'lightblue': 'white'"
+
+  >
+
 <td>{{ song.title }}</td>
 <td>{{ song.artist }}</td>
 <td>{{ song.likes }}
@@ -36,6 +40,7 @@
 <i class="fa fa-plus" aria-hidden="true" (click)="addLike(song.$key, song.likes)"  ></i>
 <i class="fa fa-minus" aria-hidden="true" (click)="removeLike(song.$key, song.likes)"></i>
 </td>
+
   </tr>
   </tbody>
   </table>
@@ -51,35 +56,10 @@
 
 
  <!--
- <input type="text" #newname placeholder="Name" />
-<button (click)="save(newname.value)">Set Name</button>
--->
-<!--
-
-
-
-
-<table class="table">
-    <thead>
-      <tr>
-        <th>Title</th>
-        <th>Artist</th>
-        <th>Likes</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let song of songs|  sortBy: 'likes' |  filter : term; let i  = index">
-        <td>{{song.title}}</td>
-        <td>{{song.artist}}</td>
-        <td>{{song.likes}} 
-           
-             
-            <i class="fa fa-minus" aria-hidden="true" (click)="removeLike(i)" ></i>
-            
-          </td>
-      </tr>
-    </tbody>
-  </table>
+ <form id="filter">
+    <label>Filter people by name:</label>
+    <input type="text" name="term" [(ngModel)]="term" />
+</form>
   -->
 
 
