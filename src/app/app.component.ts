@@ -22,7 +22,7 @@ export class AppComponent {
   }
   
   addLike(index){
-this.songs[index].update({likes: this.songs[index] + 1 });
+console.log("worls")
 
 } 
 
