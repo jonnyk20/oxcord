@@ -16,15 +16,20 @@ export class AppComponent {
     title = 'Oxcord';
 
 
-  songs: FirebaseObjectObservable<any>;
-   constructor(db: AngularFireDatabase) {
-    this.songs = db.object('/songs');
+  songs: FirebaseListObservable<any[]>;
+   constructor(private db: AngularFireDatabase) {
+    this.songs = db.list('/songs');
+   
   }
   
-  addLike(index){
-console.log("worls")
+addLike(id: string, likes: number): void {
 
-} 
+ this.db.list('/songs/').update(id,{ likes: likes +1 });
+}
+removeLike(id: string, likes: number): void {
+
+ this.db.list('/songs/').update(id,{ likes: likes -1 });
+}
 
 
 
