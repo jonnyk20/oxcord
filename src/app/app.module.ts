@@ -12,6 +12,8 @@ import { AngularFireDatabaseModule, AngularFireDatabase, FirebaseListObservable 
 import { AngularFireAuthModule} from 'angularfire2/auth';
 import { environment } from '../environments/environment';
 
+import { AngularFireAuth } from 'angularfire2/auth';
+
 
 @NgModule({
   declarations: [
