@@ -33,10 +33,14 @@ user: Observable<firebase.User>;
    
   }
   
+noLike(){
+console.log("Not Logged in");
+}
+  
 
 addLike(id: string, likes: number): void {
 
- this.db.list('/songs/').update(id,{ likes: likes +1 });
+ this.db.list('/songs/').update(id,{ likes: likes +1 })
 }
 removeLike(id: string, likes: number): void {
 
@@ -59,8 +63,8 @@ fblogin() {
   }
 
 testAction(){
-
-
+var result = document.getElementById('testitem');
+console.log(result);
 }
 
 

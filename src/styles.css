@@ -13,3 +13,15 @@ body {
 .hidden{
     display:none;
 }
+
+.subtitle
+{
+    color:#6b6b6b;
+}
+
+.np {
+    background: skyblue;
+}
+.topbox{
+    background: white;
+}
