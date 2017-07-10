@@ -5,7 +5,9 @@ import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable }
 import { AngularFireAuthModule,AngularFireAuth} from 'angularfire2/auth';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Subject } from 'rxjs/Subject';
+import {Observable} from 'rxjs/Rx';
 
+import * as firebase from 'firebase/app';
 
 @Component({
   selector: 'app-root',
@@ -20,28 +22,50 @@ export class AppComponent {
     console.log("Dammit");
     }
 
-
+user: Observable<firebase.User>;
   songs: FirebaseListObservable<any[]>;
   sizeSubject: Subject<any>;
-   constructor(private db: AngularFireDatabase) {
+   
+   constructor(private db: AngularFireDatabase, public afAuth: AngularFireAuth) {
     this.songs = db.list('/songs');
+    this.user = afAuth.authState;
+   
    
   }
+  
+noLike(){
+console.log("Not Logged in");
+}
   
 
 addLike(id: string, likes: number): void {
 
- this.db.list('/songs/').update(id,{ likes: likes +1 });
+ this.db.list('/songs/').update(id,{ likes: likes +1 })
 }
 removeLike(id: string, likes: number): void {
 
  this.db.list('/songs/').update(id,{ likes: likes -1 });
 }
 
-testFn(){
-	console.log("Yah");
-}
 
+
+fblogin() {
+    this.afAuth.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider());
+  }
+
+
+  glogin() {
+    this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+  }
+
+  logout() {
+    this.afAuth.auth.signOut();
+  }
+
+testAction(){
+var result = document.getElementById('testitem');
+console.log(result);
+}
 
 
 
