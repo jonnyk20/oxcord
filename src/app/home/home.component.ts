@@ -1,6 +1,4 @@
-//COMPONENT TS
-
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import { AngularFireAuthModule,AngularFireAuth} from 'angularfire2/auth';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -10,33 +8,30 @@ import {Observable} from 'rxjs/Rx';
 import * as firebase from 'firebase/app';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.css']
 })
-
-
-export class AppComponent {
-    title = 'Oxcord';
-    ngOnInit() {
-    console.log("Dammit");
-    }
+export class HomeComponent implements OnInit {
 
 user: Observable<firebase.User>;
   songs: FirebaseListObservable<any[]>;
   sizeSubject: Subject<any>;
    
-   constructor(private db: AngularFireDatabase, public afAuth: AngularFireAuth) {
+
+  constructor(private db: AngularFireDatabase, public afAuth: AngularFireAuth) {
     this.songs = db.list('/songs');
     this.user = afAuth.authState;
    
    
   }
-  
-noLike(){
+
+  ngOnInit() {
+  }
+
+  noLike(){
 console.log("Not Logged in");
 }
-  
 
 addLike(id: string, likes: number): void {
 
@@ -67,7 +62,4 @@ var result = document.getElementById('testitem');
 console.log(result);
 }
 
-
-
 }
-

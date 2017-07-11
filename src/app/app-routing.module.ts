@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { SortByPipe } from './sort-by.pipe';
@@ -16,34 +17,22 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './header/header.component';
 import { AdminComponent } from './admin/admin.component';
-
-import { AppRoutingModule } from './app-routing.module';
 import { TestComponent } from './test/test.component';
 
-import { PlaylistService } from './playlist.service';
+const appRoutes: Routes = [
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: 'home', component: HomeComponent },
+  { path: 'admin', component: AdminComponent },
+  { path: 'test', component: TestComponent },
+  { path: '**', redirectTo: '/home' }
+];
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    SortByPipe,
-   FilterPipe,
-   HomeComponent,
-   HeaderComponent,
-   AdminComponent,
-   TestComponent
-    
-  ],
   imports: [
-    BrowserModule,
-    FormsModule,
-    AngularFireModule.initializeApp(environment.firebase, 'my-app'),
-    AngularFireDatabaseModule,
-    AngularFireAuthModule,
-    AppRoutingModule
-    
-
+    RouterModule.forRoot(appRoutes)
   ],
-  providers: [PlaylistService],
-  bootstrap: [AppComponent]
+  exports: [RouterModule]
 })
-export class AppModule { }
+export class AppRoutingModule {
+
+}
