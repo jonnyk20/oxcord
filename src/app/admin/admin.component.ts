@@ -17,7 +17,7 @@ export class AdminComponent implements OnInit {
 user: Observable<firebase.User>;
   songs: FirebaseListObservable<any[]>;
   sizeSubject: Subject<any>;
-   
+   newLikes = 3;
 
   constructor(private db: AngularFireDatabase, public afAuth: AngularFireAuth) {
     this.songs = db.list('/songs');
@@ -42,19 +42,28 @@ removeLike(id: string, likes: number): void {
  this.db.list('/songs/').update(id,{ likes: likes -1 });
 }
 
+addSong(){
+ // this.db.list('/songs/').push("testSong");
+ this.db.list('/songs/').push({artist: "TestArtist", likes: 3, play: 0, title: "TestTitle"});
+}
+
+deleteSong(id: string){
+ this.db.list('/songs').remove(id);
+}
 
 fblogin() {
     this.afAuth.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider());
   }
 
-
   glogin() {
     this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
   }
-
   logout() {
     this.afAuth.auth.signOut();
   }
+
+  
+
   
 testAction(){
 var result = document.getElementById('testitem');

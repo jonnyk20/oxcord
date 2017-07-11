@@ -20,11 +20,10 @@ import { AdminComponent } from './admin/admin.component';
 import { TestComponent } from './test/test.component';
 
 const appRoutes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: 'home', component: HomeComponent },
+ { path: '', component: HomeComponent, pathMatch: 'full'  },
   { path: 'admin', component: AdminComponent },
   { path: 'test', component: TestComponent },
-  { path: '**', redirectTo: '/home' }
+  { path: '**', redirectTo: '' }
 ];
 
 @NgModule({
