@@ -15,19 +15,29 @@ import * as firebase from 'firebase/app';
 })
 export class TestComponent implements OnInit {
   songs: any;
+  
 
   constructor( private plService: PlaylistService) { }
 
   ngOnInit() {
    this.plService.getSongs() .subscribe (songs => { 
-     console.log(songs);
+     
      this.songs = songs;
+      for (let song of this.songs) {
+        console.log(song.title)
+      }
+
         });
+
+      
+       
+      
   }
 
  addLike(id: string, likes: number): void {
   this.plService.addLike(id, likes);
 }
+
 
 
 }

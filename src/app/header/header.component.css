@@ -30,7 +30,14 @@ body {
 }
 .auth {
     margin:10px;
+    /*
  position:fixed;
    right:10px;
    top:0px
+   */
+}
+.title {
+    margin-top: 20px;
+    font-size: 2em;
+    display: inline-block;
 }
