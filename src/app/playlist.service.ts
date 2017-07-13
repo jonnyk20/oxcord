@@ -1,5 +1,6 @@
 //import { Ingredient } from '../shared/ingredient.model';
 import { EventEmitter, Injectable } from '@angular/core';
+import { Song } from './song.model';
 
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import { AngularFireAuthModule,AngularFireAuth} from 'angularfire2/auth';
@@ -14,12 +15,25 @@ export class PlaylistService {
 user: Observable<firebase.User>;
   songs: FirebaseListObservable<any[]>;
   sizeSubject: Subject<any>;
-
+  
 
   constructor(private db: AngularFireDatabase, public afAuth: AngularFireAuth) {
-    this.songs = db.list('/songs');
-    this.user = afAuth.authState;
+    
   }
+
+ getSongs(){
+  this.songs = this.db.list('/songs') as FirebaseListObservable<Song[]>
+  return this.songs;
+ }
+  
+
+
+ 
+
+ // this.songs = db.list('/songs');
+  //  this.user = afAuth.authState;
+
+  
 
     noLike(){
 console.log("Not Logged in");
@@ -46,3 +60,13 @@ fblogin() {
   }
 
 }
+/*
+  interface Song{
+    $key?: number;
+    title?: string;
+    artist?: string;
+    likes?: number;
+    play?: number;
+    np?: boolean;
+  }
+  */

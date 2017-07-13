@@ -1,3 +1,46 @@
-<p>
-  header works!
-</p>
+<div style="text-align:center" class="topbox sticky-top">
+ 
+
+    <div class="row">
+      
+      <div class="col-md-12 text-center">
+        
+            <span class="title display-4">
+                Welcome Home
+            </span>
+
+            <span *ngIf="(user | async)?.uid" class="auth text-muted">
+                You are Logged in!
+                <button class="btn btn-md btn-basic auth" (click)="logout()" id="testitem">Logout</button>
+            </span>
+
+            <span *ngIf="!(user | async)?.uid" class="auth">
+                <button class="btn btn-primary auth" (click)="fblogin()">
+                    <i class="fa fa-facebook" aria-hidden="true" ></i>
+                    Sign in
+                </button>
+            </span>
+
+        </div>
+
+
+  </div>
+
+
+<div class="row" > 
+
+      <div class="col-md-12 np " >
+      <div class="dark bg-info">
+          <i class="fa fa-play" aria-hidden="true"></i>
+          Now Playing: "Test Title" - "Test Artist"</div>
+      </div>
+ 
+</div>
+
+
+
+
+
+
+
+</div>

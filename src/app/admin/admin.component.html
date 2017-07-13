@@ -1,38 +1,5 @@
 <!--We Made it.-->
-<div style="text-align:center" class="topbox sticky-top">
-    <div class="row">
-        
-        
-        <div *ngIf="!(user | async)?.uid" class="col-md-12 text-right">
-        <button class="btn btn-primary" (click)="fblogin()">
-            <i class="fa fa-facebook" aria-hidden="true" ></i>
-            Sign in</button>
-        </div>
-        
-        <div *ngIf="(user | async)?.uid" class="col-md-12 text-right">
-            <span class="text-muted">You are Logged in!</span>
-        <button class="btn btn-md btn-basic" (click)="logout()" id="testitem">Logout</button>
-        </div>
-    </div>
 
-    <div class="row">
-      <div class="col-md-12">
-        <h1>
-        Welcome Admin
-      </h1>
-        </div>
-  </div>
-    <div class="row" *ngFor="let song of songs | async "> 
-
-      <div class="col-md-12 np" *ngIf="song.play == 1">
-      <h4 class="dark">
-          <i class="fa fa-play" aria-hidden="true"></i>
-          Now Playing: "{{song.title}}" - {{song.artist}}</h4>
-      </div>
- 
-</div>
-
-</div>
 
 <h4 class="subtitle" style="text-align:center">Tonight's Songs: </h4>
 

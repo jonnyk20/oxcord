@@ -21,6 +21,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { TestComponent } from './test/test.component';
 
 import { PlaylistService } from './playlist.service';
+import { PlaylistComponent } from './playlist/playlist.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { PlaylistService } from './playlist.service';
    HomeComponent,
    HeaderComponent,
    AdminComponent,
-   TestComponent
+   TestComponent,
+   PlaylistComponent
     
   ],
   imports: [

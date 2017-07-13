@@ -14,13 +14,20 @@ import * as firebase from 'firebase/app';
   styleUrls: ['./test.component.css']
 })
 export class TestComponent implements OnInit {
-  songs: FirebaseListObservable<any[]>;
+  songs: any;
 
   constructor( private plService: PlaylistService) { }
 
   ngOnInit() {
-    
-    console.log(this.songs);
+   this.plService.getSongs() .subscribe (songs => { 
+     console.log(songs);
+     this.songs = songs;
+        });
   }
+
+ addLike(id: string, likes: number): void {
+  this.plService.addLike(id, likes);
+}
+
 
 }

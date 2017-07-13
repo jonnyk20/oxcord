@@ -1,6 +1,12 @@
-<p>
-  test works!
-</p>
+
+
+
+<div style="text-align:center" class=" sticky-top">
+
+</div>
+
 <ul>
-  <!--<li *ngFor="let song of songs"> {{song.title}}</li>-->
+<li *ngFor="let song of songs"> {{song.title}} - ({{ song.likes }})
+<i class="fa fa-plus" aria-hidden="true" (click)="addLike(song.$key, song.likes)"  ></i>
+</li>
 </ul>

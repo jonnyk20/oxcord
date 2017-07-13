@@ -1,11 +1,4 @@
-<!--We Made it.-->
-
-
 <h4 class="subtitle" style="text-align:center">Tonight's Songs: </h4>
-    
-    
-    
-
 <div class="tablediv">
 <table class="table">
     <thead>
@@ -16,23 +9,24 @@
       </tr>
     </thead>
     <tbody>
-  <tr *ngFor="let song of songs | async |  sortBy: 'likes' ; let i  = index"
+  <tr *ngFor="let song of songs | async  ; let i  = index"
 
-
+    [style.backgroundColor]="song.play == 1? 'skyblue' : 'transparent'"
   >
-
-<td *ngIf="song.play == 0">{{ song.title }}</td>
-<td *ngIf="song.play == 0">{{ song.artist }}</td>
-<td *ngIf="song.play == 0" [style.min-width]="'100px'" >{{ song.likes }}
- 
+  <!--|  sortBy: 'likes'-->
+<td >{{ song.title }}</td>
+<td >{{ song.artist }}</td>
+<td  [style.min-width]="'200px'" >{{ song.likes }}
             <i class="fa fa-heart-o" aria-hidden="true"  *ngIf="song.likes < 1"></i>
          <i class="fa fa-heart" aria-hidden="true" *ngIf="song.likes >= 1"></i>
-            <i class="fa fa-plus" aria-hidden="true" (click)="addLike(song.$key, song.likes)" *ngIf="(user | async)?.uid" ></i>
-  
-    
-    <i class="fa fa-plus" aria-hidden="true" (click)="noLike()" *ngIf="!(user | async)?.uid" data-toggle="modal" data-target="#myModal"></i>
-    
-    
+            <i class="fa fa-plus" aria-hidden="true" (click)="addLike(song.$key, song.likes)"  ></i>
+            <i class="fa fa-minus" aria-hidden="true" (click)="removeLike(song.$key, song.likes)"></i>
+            
+            <span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   </span>
+            <i class="fa fa-play" [class.hidden]="song.play == 1" aria-hidden="true"></i>
+            <i class="fa fa-stop" [class.hidden]="song.play != 1" aria-hidden="true"></i>
+            <span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   </span>
+            <i class="fa fa-trash-o" aria-hidden="true" (click)="deleteSong(song.$key)"></i>   
 </td>
 
   </tr>
@@ -42,19 +36,19 @@
 
  <div class="hidden"> {{ (user | async)?.uid }} </div>
 
+<div class="container">
+<div class="row">
+<div class="col-md-12">
+<input type="text" placeholder="Title" value="" name="newTitle" [(ngModel)]="newTitle" />
+<input type="text" placeholder="Artist" value="" name="newArtist" [(ngModel)]="newArtist" />
+<input type="number" name="newLikes" value="3" min="1" max="10" [(ngModel)]="newLikes">
+<button class="btn btn-success" (click)="addSong()">Add Song </button>
+<div> Likes: {{newLikes }} </div>
+</div>
+</div>
+</div>
 
 
-
- <!--
- <form id="filter">
-    <label>Filter people by name:</label>
-    <input type="text" name="term" [(ngModel)]="term" />
-</form>
-<i class="fa fa-plus" aria-hidden="true" (click)="addLike(song.$key, song.likes)"  ></i>
-<i class="fa fa-minus" aria-hidden="true" (click)="removeLike(song.$key, song.likes)"></i>
-
-  -->
-<!-- Button trigger modal -->
 
 
 <!-- Modal -->
@@ -77,19 +71,11 @@
          Great! Now you can vote for songs!
 
           </div>
-          
-          
-          
       </div>
       <div class="modal-footer">
           
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          
-          
-   
-         
-          
-          
+ 
       </div>
     </div>
   </div>

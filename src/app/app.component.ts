@@ -53,11 +53,9 @@ fblogin() {
     this.afAuth.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider());
   }
 
-
   glogin() {
     this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
   }
-
   logout() {
     this.afAuth.auth.signOut();
   }
