@@ -23,7 +23,7 @@ const appRoutes: Routes = [
  { path: '', component: HomeComponent, pathMatch: 'full'  },
   { path: 'admin', component: AdminComponent },
   { path: 'test', component: TestComponent },
-  { path: '**', redirectTo: '' }
+  //{ path: '**', redirectTo: '' }
 ];
 
 @NgModule({

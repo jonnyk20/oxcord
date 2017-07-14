@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
-import { AngularFireAuthModule,AngularFireAuth} from 'angularfire2/auth';
+
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Subject } from 'rxjs/Subject';
 import {Observable} from 'rxjs/Rx';
@@ -8,7 +8,8 @@ import { Song } from '../song.model';
 
 
 import * as firebase from 'firebase/app';
-
+import { PlaylistService } from '../playlist.service'
+import { AuthService } from '../auth/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -16,36 +17,59 @@ import * as firebase from 'firebase/app';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-
-    
-   
-user: Observable<firebase.User>;
+ nowPlaying: any;
+ npArtist: any;
+ npTitle: any;
+ user:any;   
+@Input() currentSong: any;
 
   sizeSubject: Subject<any>;
    
-   constructor( public afAuth: AngularFireAuth) {
-    this.user = afAuth.authState;
+   constructor(
+   private plService: PlaylistService,
+   private authService: AuthService) {
+   
   }
 
    ngOnInit() {
+     this.plService.getNowPlaying()
+     .subscribe (nowPlaying => { 
+     this.nowPlaying = nowPlaying[0];
+
+        });
+
+     this.authService.getUser().subscribe (user => { 
+     this.user = user;
+     
+        });
+        
+            this.npTitle = this.nowPlaying.title;
+     this.npArtist = this.nowPlaying.artist;
+
     }
+
+   ngDoCheck(){
+ 
+   }
 
   
 noLike(){
 console.log("Not Logged in");
 }
   
+checkUser(){
+  if (this.user){
+  console.log(this.user);}
+  else {console.log("Not logged in");}
 
+}
 
 fblogin() {
-    this.afAuth.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider());
-  }
+  this.authService.signInFB();
+}
 
-  glogin() {
-    this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
-  }
   logout() {
-    this.afAuth.auth.signOut();
+    this.authService.logout();
   }
 
 

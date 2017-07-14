@@ -5,7 +5,8 @@ import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable }
 import { AngularFireAuthModule,AngularFireAuth} from 'angularfire2/auth';
 import { Subject } from 'rxjs/Subject';
 import {Observable} from 'rxjs/Rx';
-
+import { AuthService } from '../auth/auth.service';
+// import { UsersService } from '../users/users.service';
 import * as firebase from 'firebase/app';
 
 @Component({
@@ -15,29 +16,26 @@ import * as firebase from 'firebase/app';
 })
 export class TestComponent implements OnInit {
   songs: any;
-  
+  nowPlaying: any;
+  authStatus: boolean;
 
-  constructor( private plService: PlaylistService) { }
+  constructor( private plService: PlaylistService,
+               private authService: AuthService,
+              //  private usersService: UsersService
+               ) { }
 
   ngOnInit() {
    this.plService.getSongs() .subscribe (songs => { 
-     
      this.songs = songs;
-      for (let song of this.songs) {
-        console.log(song.title)
-      }
+        });   
+    
+    this.authStatus = this.authService.isAuthenticated();
 
-        });
-
-      
-       
-      
   }
 
- addLike(id: string, likes: number): void {
-  this.plService.addLike(id, likes);
-}
-
+  onAddUser(){
+this.authService.addUser();
+  }
 
 
 }

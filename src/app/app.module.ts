@@ -21,7 +21,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { TestComponent } from './test/test.component';
 
 import { PlaylistService } from './playlist.service';
+import { AuthService } from './auth/auth.service';
+import { UsersService } from './users/users.service';
 import { PlaylistComponent } from './playlist/playlist.component';
+
+
 
 @NgModule({
   declarations: [
@@ -45,7 +49,7 @@ import { PlaylistComponent } from './playlist/playlist.component';
     
 
   ],
-  providers: [PlaylistService],
+  providers: [PlaylistService, AuthService, UsersService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

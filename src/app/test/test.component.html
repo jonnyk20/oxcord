@@ -1,10 +1,9 @@
 
 
 
-<div style="text-align:center" class=" sticky-top">
 
-</div>
-
+<div> signed in? - {{authStatus}} </div>
+<button class="btn btn-primary" (click)="onnAddUser()"> Add User </button>
 <ul>
 <li *ngFor="let song of songs"> {{song.title}} - ({{ song.likes }})
 <i class="fa fa-plus" aria-hidden="true" (click)="addLike(song.$key, song.likes)"  ></i>

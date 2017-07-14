@@ -1,5 +1,5 @@
 //import { Ingredient } from '../shared/ingredient.model';
-import { EventEmitter, Injectable } from '@angular/core';
+import { EventEmitter, Injectable, Output } from '@angular/core';
 import { Song } from './song.model';
 
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
@@ -15,25 +15,41 @@ export class PlaylistService {
 user: Observable<firebase.User>;
   songs: FirebaseListObservable<any[]>;
   sizeSubject: Subject<any>;
-  
+  nowPlaying: FirebaseListObservable<Song>;
+  np: any;
+  npKey: any;
+  @Output('currentSong') currentSong = new EventEmitter<Song>();
 
   constructor(private db: AngularFireDatabase, public afAuth: AngularFireAuth) {
+    this.songs = this.db.list('/songs', {
+      query: {
+        orderByChild: 'likes',
+      
+      }
     
   }
+    
+    
+    ) as FirebaseListObservable<Song[]>;
+    this.nowPlaying = this.db.list('/songs', {
+      query: {
+        orderByChild: 'play',
+        equalTo: 1
+      }
+    
+  })  as FirebaseListObservable<Song>      };
 
  getSongs(){
-  this.songs = this.db.list('/songs') as FirebaseListObservable<Song[]>
   return this.songs;
  }
   
-
-
+  getNowPlaying(){
+    return this.nowPlaying;
+  }
  
 
- // this.songs = db.list('/songs');
-  //  this.user = afAuth.authState;
 
-  
+
 
     noLike(){
 console.log("Not Logged in");
@@ -47,6 +63,29 @@ removeLike(id: string, likes: number): void {
 
  this.db.list('/songs/').update(id,{ likes: likes -1 });
 }
+
+
+play(id, title, artist){
+ this.getNowPlaying().subscribe (nowPlaying => { 
+     this.np = nowPlaying[0];
+     this.npKey = this.np.$key
+        });
+
+            this.songs.update(this.npKey,{ play: 0 });
+     this.songs.update(id,{ play: 1 });
+     this.currentSong.emit({title: title, artist: artist});
+}
+
+
+addSong(){
+//this.db.list('/songs/').push({artist: "TestArtist", likes: 3, play: 0, title: "TestTitle"});
+
+}
+deleteSong(id: string){
+ this.db.list('/songs').remove(id);
+}
+
+
 
 fblogin() {
     this.afAuth.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider());

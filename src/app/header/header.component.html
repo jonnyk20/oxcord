@@ -9,12 +9,12 @@
                 Welcome Home
             </h4>
 
-            <span *ngIf="(user | async)?.uid" class="auth text-muted pull-right">
+            <span *ngIf="user" class="auth text-muted pull-right">
                 You are Logged in!
                 <button class="btn btn-md btn-basic auth btn-sm" (click)="logout()" id="testitem">Logout</button>
             </span>
 
-            <span *ngIf="!(user | async)?.uid" class="auth pull-right">
+            <span *ngIf="!user" class="auth pull-right">
                 <button class="btn btn-primary auth btn-sm" (click)="fblogin()">
                     <i class="fa fa-facebook" aria-hidden="true" ></i>
                     Sign in
@@ -32,15 +32,17 @@
       <div class="col-md-12 np " >
       <div class="dark bg-info">
           <i class="fa fa-play" aria-hidden="true"></i>
-          Now Playing: "Test Title" - "Test Artist"</div>
-      </div>
+          Now Playing: "{{nowPlaying.title}}" - "{{nowPlaying .artist}}"</div>
+ 
+</div>
  
 </div>
 
 
 
 
-
-
+<div > USER: {{ user.uid }} 
+     <button class="btn btn-default" (click)="checkUser()"> Check</button>
+</div>
 
 </div>

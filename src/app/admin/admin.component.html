@@ -13,7 +13,7 @@
       </tr>
     </thead>
     <tbody>
-  <tr *ngFor="let song of songs | async  ; let i  = index"
+  <tr *ngFor="let song of songs ; let i  = index"
 
     [style.backgroundColor]="song.play == 1? 'skyblue' : 'transparent'"
   >
@@ -30,7 +30,7 @@
             <i class="fa fa-minus" aria-hidden="true" (click)="removeLike(song.$key, song.likes)"></i>
             
             <span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   </span>
-            <i class="fa fa-play" [class.hidden]="song.play == 1" aria-hidden="true"></i>
+            <i class="fa fa-play" [class.hidden]="song.play == 1" (click)="play(song.$key, song.title, song.artist)" aria-hidden="true"></i>
             <i class="fa fa-stop" [class.hidden]="song.play != 1" aria-hidden="true"></i>
             <span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   </span>
             <i class="fa fa-trash-o" aria-hidden="true" (click)="deleteSong(song.$key)"></i>
@@ -43,7 +43,6 @@
   </table>
 </div>
 
- <div class="hidden"> {{ (user | async)?.uid }} </div>
 
 <div class="container">
 <div class="row">
@@ -52,7 +51,7 @@
 <input type="text" placeholder="Artist" value="" name="newArtist" [(ngModel)]="newArtist" />
 <input type="number" name="newLikes" value="3" min="1" max="10" [(ngModel)]="newLikes">
 <button class="btn btn-success" (click)="addSong()">Add Song </button>
-<div> Likes: {{newLikes }} </div>
+
 </div>
 </div>
 </div>
