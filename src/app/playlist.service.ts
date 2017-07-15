@@ -6,6 +6,7 @@ import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable }
 import { AngularFireAuthModule,AngularFireAuth} from 'angularfire2/auth';
 import { Subject } from 'rxjs/Subject';
 import {Observable} from 'rxjs/Rx';
+import 'rxjs/Rx';
 
 import * as firebase from 'firebase/app';
 
@@ -18,7 +19,7 @@ user: Observable<firebase.User>;
   nowPlaying: FirebaseListObservable<Song>;
   np: any;
   npKey: any;
-  @Output('currentSong') currentSong = new EventEmitter<Song>();
+
 
   constructor(private db: AngularFireDatabase, public afAuth: AngularFireAuth) {
     this.songs = this.db.list('/songs', {
@@ -30,7 +31,7 @@ user: Observable<firebase.User>;
   }
     
     
-    ) as FirebaseListObservable<Song[]>;
+    ).map((array) => array.reverse())  as FirebaseListObservable<Song[]>;
     this.nowPlaying = this.db.list('/songs', {
       query: {
         orderByChild: 'play',
@@ -73,7 +74,11 @@ play(id, title, artist){
 
             this.songs.update(this.npKey,{ play: 0 });
      this.songs.update(id,{ play: 1 });
-     this.currentSong.emit({title: title, artist: artist});
+
+}
+
+stop(id){
+  this.songs.update(id,{ play: 0 });
 }
 
 

@@ -18,10 +18,9 @@ import { AuthService } from '../auth/auth.service';
 })
 export class HeaderComponent implements OnInit {
  nowPlaying: any;
- npArtist: any;
- npTitle: any;
+
  user:any;   
-@Input() currentSong: any;
+
 
   sizeSubject: Subject<any>;
    

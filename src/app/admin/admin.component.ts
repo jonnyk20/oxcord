@@ -18,6 +18,7 @@ export class AdminComponent implements OnInit {
 user: Observable<firebase.User>;
 songs: any;
 nowPlaying: any;
+term: string = '';
 
 
   constructor(private plService: PlaylistService,
@@ -43,6 +44,9 @@ removeLike(id: string, likes: number): void {
 play(id, title, artist) {
   this.plService.play(id, title, artist);
  
+}
+stop(id){
+  this.plService.stop(id);
 }
 
 addSong(){
