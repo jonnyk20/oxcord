@@ -43,8 +43,7 @@ export class HeaderComponent implements OnInit {
      
         });
         
-            this.npTitle = this.nowPlaying.title;
-     this.npArtist = this.nowPlaying.artist;
+    
 
     }
 
