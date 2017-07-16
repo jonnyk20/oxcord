@@ -34,7 +34,6 @@ export class HeaderComponent implements OnInit {
      this.plService.getNowPlaying()
      .subscribe (nowPlaying => { 
      this.nowPlaying = nowPlaying[0];
-
         });
 
      this.authService.getUser().subscribe (user => { 

@@ -24,7 +24,7 @@ import { PlaylistService } from './playlist.service';
 import { AuthService } from './auth/auth.service';
 import { UsersService } from './users/users.service';
 import { PlaylistComponent } from './playlist/playlist.component';
-
+import { HttpModule } from '@angular/http';
 
 
 @NgModule({
@@ -45,7 +45,8 @@ import { PlaylistComponent } from './playlist/playlist.component';
     AngularFireModule.initializeApp(environment.firebase, 'my-app'),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpModule
     
 
   ],

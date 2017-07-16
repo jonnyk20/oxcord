@@ -17,7 +17,7 @@ export class AdminComponent implements OnInit {
 
 user: Observable<firebase.User>;
 songs: any;
-nowPlaying: any;
+CurrentSongKey: any;
 term: string = '';
 
 
@@ -30,6 +30,12 @@ term: string = '';
       this.plService.getSongs() .subscribe (songs => { 
      this.songs = songs;
         });   
+
+        this.plService.getNowPlaying()
+     .subscribe (nowPlaying => { 
+     this.CurrentSongKey = nowPlaying[0]['$key'];
+        });
+
   }
 
 
@@ -41,8 +47,9 @@ removeLike(id: string, likes: number): void {
  this.plService.removeLike(id, likes);
 }
 
-play(id, title, artist) {
-  this.plService.play(id, title, artist);
+play(id) {
+  this.CurrentSongKey = 
+  this.plService.play(id, this.CurrentSongKey);
  
 }
 stop(id){
