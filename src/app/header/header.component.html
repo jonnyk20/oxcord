@@ -1,0 +1,59 @@
+<div style="text-align:center" class="topbox sticky-top">
+ 
+
+    <div class="row">
+      
+      <div class="col-md-12 text-center">
+        
+            <h4 class="title">
+                Oxcord
+            </h4>
+
+            <span *ngIf="user" class="auth text-muted pull-right">
+                You are Logged in!
+                <button class="btn btn-md btn-basic auth btn-sm" (click)="logout()" id="testitem">Logout</button>
+            </span>
+
+            <span *ngIf="!user" class="auth pull-right">
+                <button class="btn btn-primary auth btn-sm" (click)="fblogin()">
+                    <i class="fa fa-facebook" aria-hidden="true" ></i>
+                    Sign in
+                </button>
+            </span>
+
+        </div>
+
+
+  </div>
+
+
+<div class="row" > 
+
+      <div class="col-md-12 np " >
+      <div class="dark bg-info">
+          <i class="fa fa-play" aria-hidden="true"></i>
+          Now Playing: "{{nowPlaying?.title}}" - "{{nowPlaying?.artist}}"</div>
+ 
+</div>
+ 
+</div>
+
+
+
+
+<!--<div > USER: {{ user?.uid }} 
+     <button class="btn btn-default" (click)="checkUser()"> Check</button>
+</div>-->
+
+<table class="table table-sm">
+<thead>
+      <tr>
+        <th>Title</th>
+        <th>Artist</th>
+        <th>Likes</th>
+      </tr>
+</thead>
+</table>
+
+
+</div>

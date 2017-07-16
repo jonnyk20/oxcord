@@ -1,0 +1,33 @@
+.dark {
+    color:navy;
+}
+
+.tablediv{
+
+    max-height: 200px;
+    overflow: hidden;
+    overflow-y: scroll;
+
+}
+
+
+.starter-template {
+  padding: 3rem 1.5rem;
+  text-align: center;
+}
+
+.hidden{
+    display:none;
+}
+
+.subtitle
+{
+    color:#6b6b6b;
+}
+
+.np {
+    background: skyblue;
+}
+.topbox{
+    background: white;
+}

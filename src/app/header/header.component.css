@@ -1,0 +1,43 @@
+
+.dark {
+    color:navy;
+}
+
+
+.table {
+ margin-bottom: 0;
+}
+.starter-template {
+  padding: 3rem 1.5rem;
+  text-align: center;
+}
+
+.hidden{
+    display:none;
+}
+
+.subtitle
+{
+    color:#6b6b6b;
+}
+
+.np {
+    background: skyblue;
+}
+.topbox{
+    background-color: white;
+    z-index: 99;
+}
+.auth {
+    margin:10px;
+    /*
+ position:fixed;
+   right:10px;
+   top:0px
+   */
+}
+.title {
+    margin-top: 20px;
+    font-size: 2em;
+    display: inline-block;
+}

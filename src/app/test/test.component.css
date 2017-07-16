@@ -1,0 +1,29 @@
+
+.dark {
+    color:navy;
+}
+
+
+body {
+ 
+}
+.starter-template {
+  padding: 3rem 1.5rem;
+  text-align: center;
+}
+
+.hidden{
+    display:none;
+}
+
+.subtitle
+{
+    color:#6b6b6b;
+}
+
+
+
+.topbox{
+    background-color: white;
+    z-index: 99;
+}

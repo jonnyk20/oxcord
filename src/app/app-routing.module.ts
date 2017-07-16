@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { SortByPipe } from './sort-by.pipe';
@@ -16,41 +17,21 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './header/header.component';
 import { AdminComponent } from './admin/admin.component';
-
-import { AppRoutingModule } from './app-routing.module';
 import { TestComponent } from './test/test.component';
 
-import { PlaylistService } from './playlist.service';
-import { AuthService } from './auth/auth.service';
-import { UsersService } from './users/users.service';
-import { PlaylistComponent } from './playlist/playlist.component';
-import { HttpModule } from '@angular/http';
-
+const appRoutes: Routes = [
+ { path: '', component: HomeComponent, pathMatch: 'full'  },
+  { path: 'admin', component: AdminComponent },
+  { path: 'test', component: TestComponent },
+  //{ path: '**', redirectTo: '' }
+];
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    SortByPipe,
-   FilterPipe,
-   HomeComponent,
-   HeaderComponent,
-   AdminComponent,
-   TestComponent,
-   PlaylistComponent
-    
-  ],
   imports: [
-    BrowserModule,
-    FormsModule,
-    AngularFireModule.initializeApp(environment.firebase, 'my-app'),
-    AngularFireDatabaseModule,
-    AngularFireAuthModule,
-    AppRoutingModule,
-    HttpModule
-    
-
+    RouterModule.forRoot(appRoutes)
   ],
-  providers: [PlaylistService, AuthService, UsersService],
-  bootstrap: [AppComponent]
+  exports: [RouterModule]
 })
-export class AppModule { }
+export class AppRoutingModule {
+
+}
