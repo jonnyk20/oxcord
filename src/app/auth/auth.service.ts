@@ -23,6 +23,12 @@ export class AuthService {
 
     signInFB() {
        this.afAuth.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider())
+       .then(
+           reponse => {
+               //console.log(this.afAuth.auth.currentUser.getIdToken())
+              // console.log(this.afAuth.authState)
+           }
+       )
             // .then(
             //     response => {
             //         //this.router.navigate(['/admin']);
@@ -54,6 +60,7 @@ export class AuthService {
 
     isAuthenticated() {
         return this.authStatus;
+        
          
     }
 
