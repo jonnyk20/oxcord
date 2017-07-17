@@ -5,9 +5,12 @@
       
       <div class="col-md-12 text-center">
         
-            <h4 class="title">
+            <h4 class="title text-left">
                 Oxcord
             </h4>
+           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+             <span> Available Likes: {{availableLikes}}  <i class="fa fa-heart" aria-hidden="true"></i></span>           
+
 
             <span *ngIf="user" class="auth text-muted pull-right">
                 You are Logged in!
@@ -42,7 +45,7 @@
 
 
 <div > USER: {{ user?.uid }} 
-     <button class="btn btn-default" (click)="checkUser()"> Check</button>
+     <button class="btn btn-default" (click)="addUser()"> Add User</button>
 </div>
 
 <table class="table table-sm">

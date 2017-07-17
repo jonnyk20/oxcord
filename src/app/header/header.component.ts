@@ -21,6 +21,7 @@ export class HeaderComponent implements OnInit, DoCheck{
  testVar: string = "Hey!";
  user:any;   
  userChecked: boolean = false;
+ availableLikes: number;
 
   sizeSubject: Subject<any>;
    
@@ -38,15 +39,18 @@ export class HeaderComponent implements OnInit, DoCheck{
 
      this.authService.getUser().subscribe (user => { 
      this.user = user;
-
+     
         });
+
+     this.availableLikes = this.plService.availebleLikes;
     }
 
     ngDoCheck() {
       if (this.userChecked == false && this.user) {
       this.checkUser();
       this.userChecked = true;
-      }
+    }
+    this.availableLikes = this.plService.availebleLikes;
     }
 
 noLike(){
@@ -61,9 +65,13 @@ checkUser(){
 
     this.authService.checkUser(this.user.uid).subscribe(
         data => { 
-            if (data.length == 0)
-            {console.log("New User!")} else {
-            console.log("Welcome "+data[0].userName+"!");}
+            if (data.length == 0)  {
+              this.addUser();
+          } else {
+            console.log("Welcome "+data[0].userName+"!");
+            this.availableLikes = data[0].availableLikes;
+            this.plService.availebleLikes =  data[0].availableLikes;
+            }
               }
     )
   }
@@ -78,7 +86,10 @@ fblogin() {
     this.authService.logout();
   }
 
-
+ addUser(){
+  const newId = this.user.uid
+  this.authService.addUser(newId);
+ }
 
 
 }

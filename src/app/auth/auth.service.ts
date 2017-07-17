@@ -13,6 +13,7 @@ export class AuthService {
     users: Observable<any>;
     token: string;
     authStatus: boolean;
+    userStorage: any;
 
     constructor(private router: Router,
                 public afAuth: AngularFireAuth,
@@ -84,9 +85,9 @@ export class AuthService {
        return this.user
    }
 
-    addUser(){
-        this.db.list('/users').push({username: "Testing", likes: 3});
-
+    addUser(uid){
+        this.db.list('/users/').push({userId: uid, userName: "User1", availableLikes: 10});
+        
     }
 
 }

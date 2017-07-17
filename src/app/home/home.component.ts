@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, DoCheck } from '@angular/core';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import { AngularFireAuthModule,AngularFireAuth} from 'angularfire2/auth';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -18,6 +18,7 @@ export class HomeComponent implements OnInit {
 user: Observable<firebase.User>;
   songs: any;
   sizeSubject: Subject<any>;
+  availableLikes:number;
    
 
   constructor(private plService: PlaylistService, public afAuth: AngularFireAuth) {
@@ -31,12 +32,21 @@ user: Observable<firebase.User>;
         });   
   }
 
+  
+    ngDoCheck() {
+    this.availableLikes = this.plService.availebleLikes;
+    }
+
   noLike(){
 console.log("Not Logged in");
 }
 
 addLike(id: string, likes: number): void {
+  if(this.availableLikes <= 0 ) {
+    console.log("No Mmore likes!");
+  } else {
   this.plService.addLike(id, likes);
+  }
 }
 
 removeLike(id: string, likes: number): void {

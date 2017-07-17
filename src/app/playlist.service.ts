@@ -20,7 +20,7 @@ user: Observable<firebase.User>;
   nowPlaying: FirebaseListObservable<Song>;
   np: any;
   npKey: any = null;
-
+  availebleLikes: number = 5;
 
   constructor(private db: AngularFireDatabase, 
               public afAuth: AngularFireAuth,
@@ -63,6 +63,8 @@ console.log("Not Logged in");
 addLike(id: string, likes: number): void {
 
  this.db.list('/songs/').update(id,{ likes: likes +1 })
+ this.db.list('/users/').update('-KpBLapdIGwjXl4Yo8Ct',{ availableLikes: this.availebleLikes -1 })
+
 }
 removeLike(id: string, likes: number): void {
 

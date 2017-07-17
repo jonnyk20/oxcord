@@ -33,9 +33,9 @@ export class TestComponent implements OnInit {
 
   }
 
-  onAddUser(){
-this.authService.addUser();
-  }
+//   onAddUser(){
+// this.authService.addUser();
+//   }
 
 
 }
