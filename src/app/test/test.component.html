@@ -6,31 +6,42 @@
 <table class="table">
     
     <tbody>
-  <tr *ngFor="let song of songs ; let i  = index"
-  >
-<ng-container *ngIf="song.likes >= 10">
-<td *ngIf="song.play == 0">{{ song.title }}</td>
-<td *ngIf="song.play == 0">{{ song.artist }}</td>
-<td *ngIf="song.play == 0" [style.min-width]="'100px'" >{{ song.likes }}
- 
-            <i class="fa fa-heart-o" aria-hidden="true"  *ngIf="song.likes < 1"></i>
-         <i class="fa fa-heart" aria-hidden="true" *ngIf="song.likes >= 1"></i>
-            <i class="fa fa-plus" aria-hidden="true" (click)="addLike(song.$key, song.likes)" *ngIf="(user | async)?.uid" ></i>
-    <i class="fa fa-plus" aria-hidden="true" (click)="noLike()" *ngIf="!(user | async)?.uid" data-toggle="modal" data-target="#myModal"></i>
-</td>
-</ng-container>
-  </tr>
+      <tr  *ngFor="let song of songs ; let i  = index">
+  <app-song
+  
+  [song]="song"
+  > </app-song>
+      </tr>
   </tbody>
   </table>
 </div>
 
 <div 
 style="height:100px; width: 100px"
+
+ 
 >
   Animate Me
 </div>
+<button class="btn btn-default" > Animate </button>
+<button class="btn btn-default" (click)="onRevert()"> Revert </button>
 
 
-
-
-
+<table class="table">
+  <tr  [@divState]="state">
+    <td>Key</td>
+    <td>Value</td>
+  </tr>
+    <tr>
+    <td>Key</td>
+    <td>Value</td>
+  </tr>
+    <tr>
+    <td>Key</td>
+    <td>Value</td>
+  </tr>
+    <tr>
+    <td>Key</td>
+    <td>Value</td>
+  </tr>
+</table>

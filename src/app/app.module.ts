@@ -25,8 +25,9 @@ import { AuthService } from './auth/auth.service';
 import { UsersService } from './users/users.service';
 import { PlaylistComponent } from './playlist/playlist.component';
 import { HttpModule } from '@angular/http';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
-import { trigger, state, style } from '@angular/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SongComponent } from './song/song.component'
+
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { trigger, state, style } from '@angular/animations';
    HeaderComponent,
    AdminComponent,
    TestComponent,
-   PlaylistComponent
+   PlaylistComponent,
+   SongComponent
     
   ],
   imports: [
