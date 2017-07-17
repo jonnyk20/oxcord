@@ -26,6 +26,7 @@ import { UsersService } from './users/users.service';
 import { PlaylistComponent } from './playlist/playlist.component';
 import { HttpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { trigger, state, style } from '@angular/animations';
 
 
 @NgModule({
