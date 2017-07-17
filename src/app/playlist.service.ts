@@ -74,7 +74,7 @@ removeLike(id: string, likes: number): void {
 
 play(nextSongKey, currentSongKey){
 
-console.log("Play!")
+
   this.db.list('/songs/').update(nextSongKey,{ play: 1 });
   this.db.list('/songs/').update(currentSongKey,{ play: 0 });
   return nextSongKey;

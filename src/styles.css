@@ -6,3 +6,10 @@
     font-weight: bold;
 }
 
+.available {
+    color:gray;
+}
+
+.upcoming {
+    background: lightcyan;
+}

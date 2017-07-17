@@ -25,6 +25,7 @@ import { AuthService } from './auth/auth.service';
 import { UsersService } from './users/users.service';
 import { PlaylistComponent } from './playlist/playlist.component';
 import { HttpModule } from '@angular/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 
 
 @NgModule({
@@ -46,7 +47,8 @@ import { HttpModule } from '@angular/http';
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     AppRoutingModule,
-    HttpModule
+    HttpModule,
+    BrowserAnimationsModule
     
 
   ],

@@ -23,8 +23,8 @@
     Upcoming </td>
     </tr>
 
-  <tr *ngFor="let song of songs | filter: term; let i  = index"
-    [style.backgroundColor]="song.play == 1? 'skyblue' : 'transparent'">
+  <tr *ngFor="let song of songs| sortBy: 'likes'  | filter: term; let i  = index"
+    [style.backgroundColor]="song.play == 1? 'skyblue' : 'lightcyan'">
 <ng-container *ngIf="song.likes > 0">
 <td >{{ song.title }}</td>
 <td >{{ song.artist }}</td>
@@ -45,7 +45,7 @@
   </tr>
 
 <!--Available -->
-  <tr class="text-center">
+  <tr class="text-center available">
     <td class="tb-header table-active" colspan="3">
     Available </td>
     </tr>
@@ -53,6 +53,7 @@
 
 
   <tr *ngFor="let song of songs | filter: term; let i  = index"
+    class="available"
     [style.backgroundColor]="song.play == 1? 'skyblue' : 'transparent'">
     <ng-container *ngIf="song.likes <= 0">
 <td >{{ song.title }}</td>
@@ -93,14 +94,11 @@
 
 
 
-<div>
-<form id="filter" class="pull-right">
-    <label>
-<i class="fa fa-search" aria-hidden="true"></i>
-    </label>
-    <input type="text" name="term" [(ngModel)]="term" />
-</form>
-</div>
+
+
+
+
+
 
 
 
@@ -111,7 +109,8 @@
 <input type="text" placeholder="Artist" value="" name="newArtist" [(ngModel)]="newArtist" />
 <input type="number" name="newLikes" value="3" min="1" max="10" [(ngModel)]="newLikes">
 <button class="btn btn-success" (click)="addSong()">Add Song </button>
-
+<i class="fa fa-search" aria-hidden="true"></i>
+    <input type="text" name="term" placeholder="Seach" [(ngModel)]="term" />
 </div>
 </div>
 </div>

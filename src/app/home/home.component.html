@@ -11,7 +11,9 @@
     Upcoming </td>
     </tr>
 
-  <tr *ngFor="let song of songs ; let i  = index">
+  <tr *ngFor="let song of songs | sortBy: 'likes' ; let i  = index"
+  class="upcoming"
+  >
  <ng-container *ngIf="song.likes > 0">
 <td *ngIf="song.play == 0">{{ song.title }}</td>
 <td *ngIf="song.play == 0">{{ song.artist }}</td>
@@ -26,12 +28,14 @@
 
 
 <!--Available -->
-  <tr class="text-center">
+  <tr class="text-center available">
     <td class="tb-header table-active" colspan="3">
     Available </td>
     </tr>
     
-    <tr *ngFor="let song of songs ; let i  = index">
+    <tr *ngFor="let song of songs ; let i  = index"
+    class="available"
+    >
  <ng-container *ngIf="song.likes <= 0">
 <td *ngIf="song.play == 0">{{ song.title }}</td>
 <td *ngIf="song.play == 0">{{ song.artist }}</td>
