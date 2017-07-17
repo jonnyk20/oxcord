@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, DoCheck } from '@angular/core';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -16,11 +16,11 @@ import { AuthService } from '../auth/auth.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, DoCheck{
  nowPlaying: any;
-
+ testVar: string = "Hey!";
  user:any;   
-
+ userChecked: boolean = false;
 
   sizeSubject: Subject<any>;
    
@@ -38,31 +38,40 @@ export class HeaderComponent implements OnInit {
 
      this.authService.getUser().subscribe (user => { 
      this.user = user;
-     
-        });
-        
-    
 
+        });
     }
 
-   ngDoCheck(){
- 
-   }
+    ngDoCheck() {
+      if (this.userChecked == false && this.user) {
+      this.checkUser();
+      this.userChecked = true;
+      }
+    }
 
-  
 noLike(){
 console.log("Not Logged in");
 }
   
 checkUser(){
-  if (this.user){
-  console.log(this.user);}
-  else {console.log("Not logged in");}
+  // if (this.user){
+  // console.log(this.user);}
+  // else {console.log("Not logged in");}
+  if (!this.user){console.log("Not Signed in!")} else {
 
+    this.authService.checkUser(this.user.uid).subscribe(
+        data => { 
+            if (data.length == 0)
+            {console.log("New User!")} else {
+            console.log("Welcome "+data[0].userName+"!");}
+              }
+    )
+  }
 }
 
 fblogin() {
-  this.authService.signInFB();
+  return this.authService.signInFB();
+ 
 }
 
   logout() {

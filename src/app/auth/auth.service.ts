@@ -5,9 +5,11 @@ import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable }
 import { AngularFireAuthModule,AngularFireAuth} from 'angularfire2/auth';
 import {Observable} from 'rxjs/Rx';
 
+
 @Injectable()
 export class AuthService {
     user: Observable<firebase.User>;
+    currentUser: any;
     users: Observable<any>;
     token: string;
     authStatus: boolean;
@@ -24,9 +26,10 @@ export class AuthService {
     signInFB() {
        this.afAuth.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider())
        .then(
-           reponse => {
+           response => {
                //console.log(this.afAuth.auth.currentUser.getIdToken())
               // console.log(this.afAuth.authState)
+              //return this.checkUser(response.user.uid);
            }
        )
             // .then(
@@ -59,10 +62,23 @@ export class AuthService {
     }
 
     isAuthenticated() {
-        return this.authStatus;
-        
-         
+        return this.authStatus;   
     }
+
+    checkUser(uid){
+       
+         this.currentUser = this.db.list('/users', {
+      query: {
+        orderByChild: 'userId',
+        equalTo: uid
+      }
+  })  as FirebaseListObservable<any>      
+
+    return this.currentUser;
+    
+
+    }
+
 
    getUser(){
        return this.user
