@@ -6,7 +6,8 @@ import { Subject } from 'rxjs/Subject';
 import {Observable} from 'rxjs/Rx';
 
 import * as firebase from 'firebase/app';
-import { PlaylistService } from '../playlist.service'
+import { PlaylistService } from '../playlist.service';
+import { SongComponent } from '../song/song.component';
 
 @Component({
   selector: 'app-home',

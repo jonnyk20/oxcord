@@ -1,47 +1,18 @@
 
 
-
-
 <div class="tablediv">
 <table class="table">
     
     <tbody>
-      <tr  *ngFor="let song of songs ; let i  = index">
+      <tr  *ngFor="let song of songs | sortBy: 'likes' ; let i  = index"
+      class="testClass"
+      >
   <app-song
-  
   [song]="song"
+  [permission]="permission"
   > </app-song>
       </tr>
   </tbody>
   </table>
 </div>
 
-<div 
-style="height:100px; width: 100px"
-
- 
->
-  Animate Me
-</div>
-<button class="btn btn-default" > Animate </button>
-<button class="btn btn-default" (click)="onRevert()"> Revert </button>
-
-
-<table class="table">
-  <tr  [@divState]="state">
-    <td>Key</td>
-    <td>Value</td>
-  </tr>
-    <tr>
-    <td>Key</td>
-    <td>Value</td>
-  </tr>
-    <tr>
-    <td>Key</td>
-    <td>Value</td>
-  </tr>
-    <tr>
-    <td>Key</td>
-    <td>Value</td>
-  </tr>
-</table>

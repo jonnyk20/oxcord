@@ -53,6 +53,7 @@ export class TestComponent implements OnInit {
   nowPlaying: any;
   authStatus: boolean;
   state = 'normal';
+  permission: string = 'admin';
 
   constructor( private plService: PlaylistService,
                private authService: AuthService,
@@ -91,7 +92,7 @@ highlight(){
     console.log("done!");
    
   }
-
+  
 
 
 }

@@ -19,6 +19,7 @@ user: Observable<firebase.User>;
 songs: any;
 CurrentSongKey: any;
 term: string = '';
+permission: string = 'admin';
 
 
   constructor(private plService: PlaylistService,
