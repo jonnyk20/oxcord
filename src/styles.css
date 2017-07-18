@@ -6,3 +6,13 @@
     font-weight: bold;
 }
 
+.available {
+    color:gray;
+}
+
+.upcoming {
+    background: lightcyan;
+}
+.testClass {
+    background-color: blue;
+}

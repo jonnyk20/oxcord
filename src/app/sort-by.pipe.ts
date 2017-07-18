@@ -9,6 +9,11 @@ import { Pipe, PipeTransform } from '@angular/core';
 
 export class SortByPipe {
   transform(array: Array<string>, args: string): Array<string> {
+     if (array==undefined) {
+      return null;
+    } else {
+
+
     array.sort((a: any, b: any) => {
 	    if ( a[args] > b[args] ){
 	    	return -1;
@@ -19,6 +24,7 @@ export class SortByPipe {
 	    }
     });
     return array;
+  }
   }
 }
 

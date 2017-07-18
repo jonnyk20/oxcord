@@ -25,6 +25,9 @@ import { AuthService } from './auth/auth.service';
 import { UsersService } from './users/users.service';
 import { PlaylistComponent } from './playlist/playlist.component';
 import { HttpModule } from '@angular/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SongComponent } from './song/song.component'
+
 
 
 @NgModule({
@@ -36,7 +39,8 @@ import { HttpModule } from '@angular/http';
    HeaderComponent,
    AdminComponent,
    TestComponent,
-   PlaylistComponent
+   PlaylistComponent,
+   SongComponent
     
   ],
   imports: [
@@ -46,7 +50,8 @@ import { HttpModule } from '@angular/http';
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     AppRoutingModule,
-    HttpModule
+    HttpModule,
+    BrowserAnimationsModule
     
 
   ],

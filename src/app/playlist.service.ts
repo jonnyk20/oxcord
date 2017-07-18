@@ -10,6 +10,7 @@ import { Http, Response } from '@angular/http';
 import 'rxjs/Rx';
 
 import * as firebase from 'firebase/app';
+import { AuthService } from './auth/auth.service';
 
 @Injectable()
 export class PlaylistService {
@@ -20,11 +21,14 @@ user: Observable<firebase.User>;
   nowPlaying: FirebaseListObservable<Song>;
   np: any;
   npKey: any = null;
-
+  availebleLikes: number = 5;
+  storedUser: any;
 
   constructor(private db: AngularFireDatabase, 
               public afAuth: AngularFireAuth,
-              private http: Http) {};
+              private http: Http,
+              private authService: AuthService
+              ) {};
 
 
  getSongs(){
@@ -61,8 +65,9 @@ console.log("Not Logged in");
 }
 
 addLike(id: string, likes: number): void {
-
+ this.storedUser = this.authService.storedUser;
  this.db.list('/songs/').update(id,{ likes: likes +1 })
+ this.db.list('/users/').update(this.storedUser.$key,{ availableLikes: this.availebleLikes -1 })
 }
 removeLike(id: string, likes: number): void {
 
@@ -72,7 +77,7 @@ removeLike(id: string, likes: number): void {
 
 play(nextSongKey, currentSongKey){
 
-console.log("Play!")
+
   this.db.list('/songs/').update(nextSongKey,{ play: 1 });
   this.db.list('/songs/').update(currentSongKey,{ play: 0 });
   return nextSongKey;

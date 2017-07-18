@@ -1,0 +1,45 @@
+
+<ng-container 
+
+  >
+  <table class="table table-sm">
+    <tr [@divState]="state"
+        (@divState.start)="animationStarted($event)"
+     
+    >
+<td width="33%"   >{{ song.title }}</td>
+<td  width="33%"  >{{ song.artist }}</td>
+<td  width="33%"  [style.min-width]="'100px'" >{{ song.likes }}
+ 
+    <i class="fa fa-heart-o" aria-hidden="true"  *ngIf="song.likes < 1"></i>
+    <i class="fa fa-heart" aria-hidden="true" *ngIf="song.likes >= 1"></i>     
+    <i class="fa fa-plus" aria-hidden="true" (click)="addLike(song.$key, song.likes)" (click)="onAnimate()" *ngIf="(user | async)?.uid" ></i>
+    <i class="fa fa-plus" aria-hidden="true" (click)="noLike()" *ngIf="!(user | async)?.uid" data-toggle="modal" data-target="#myModal"></i>
+      
+      <!--Seperate Trigger to Test Animation-->
+     <i class="fa fa-circle-o" 
+                (click)="onAnimate()"
+
+                aria-hidden="true"></i>
+        <span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+     
+     <ng-container *ngIf="permission == 'admin'">
+     <i class="fa fa-trash-o" aria-hidden="true" (click)="deleteSong(song.$key)"></i>
+     <i class="fa fa-minus" aria-hidden="true" (click)="removeLike(song.$key, song.likes)"></i>
+            <i class="fa fa-play" [class.hidden]="song.play == 1" (click)="play(song.$key)" aria-hidden="true"></i>
+            <i class="fa fa-stop" [class.hidden]="song.play != 1" (click)="stop(song.$key)" aria-hidden="true"></i>
+     </ng-container>
+
+
+
+
+
+
+
+
+
+
+</td>
+<tr>
+  </table>
+</ng-container>

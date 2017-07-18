@@ -5,12 +5,17 @@ import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable }
 import { AngularFireAuthModule,AngularFireAuth} from 'angularfire2/auth';
 import {Observable} from 'rxjs/Rx';
 
+
 @Injectable()
 export class AuthService {
     user: Observable<firebase.User>;
+    currentUser: any;
     users: Observable<any>;
+    userList: FirebaseListObservable<any[]>;
     token: string;
     authStatus: boolean;
+    userStorage: any;
+    storedUser: any;
 
     constructor(private router: Router,
                 public afAuth: AngularFireAuth,
@@ -19,14 +24,13 @@ export class AuthService {
                     this.users = this.db.list('/users') as FirebaseListObservable<any>;
                 }
 
-
-
     signInFB() {
        this.afAuth.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider())
        .then(
-           reponse => {
+           response => {
                //console.log(this.afAuth.auth.currentUser.getIdToken())
               // console.log(this.afAuth.authState)
+              //return this.checkUser(response.user.uid);
            }
        )
             // .then(
@@ -38,8 +42,6 @@ export class AuthService {
             //            ) 
             //     }
             // )
-            
-            
             .catch(
                 error => console.log(error)
             );
@@ -59,18 +61,48 @@ export class AuthService {
     }
 
     isAuthenticated() {
-        return this.authStatus;
-        
-         
+        return this.authStatus;   
     }
+
+    checkUser(uid){
+       
+         this.currentUser = this.db.list('/users', {
+      query: {
+        orderByChild: 'userId',
+        equalTo: uid
+      }
+  })  as FirebaseListObservable<any>      
+
+    return this.currentUser;
+    
+
+    }
+
 
    getUser(){
        return this.user
    }
 
-    addUser(){
-        this.db.list('/users').push({username: "Testing", likes: 3});
+   getUsers(){
 
+    this.userList = this.db.list('/users'
+    ) as FirebaseListObservable<any>;
+     return this.userList;
+ }
+
+
+    addUser(uid){
+        this.db.list('/users/').push({userId: uid, userName: "User1", availableLikes: 10});
+        
+    }
+    setUser(user){
+            
+            this.storedUser = user;
+       
     }
 
+    fillLikes(key, currentLikes, addition){
+        //console.log(key);
+        this.db.list('/users/').update(key,{ availableLikes: currentLikes + addition })
+    }
 }

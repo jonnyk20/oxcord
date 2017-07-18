@@ -1,109 +1,45 @@
 <!--We Made it.-->
 
-
-
-
-
-
-
 <div class="tablediv">
-
-
-
-
-
-
 <table class="table table-sm">
-    
     <tbody>
 
 <!--UPCOMING -->
- <tr class="text-center">
+       <tr class="text-center">
     <td class="tb-header table-active" colspan="3">
     Upcoming </td>
-    </tr>
 
-  <tr *ngFor="let song of songs | filter: term; let i  = index"
-    [style.backgroundColor]="song.play == 1? 'skyblue' : 'transparent'">
-<ng-container *ngIf="song.likes > 0">
-<td >{{ song.title }}</td>
-<td >{{ song.artist }}</td>
-<td  [style.min-width]="'200px'" >{{ song.likes }}
-            <i class="fa fa-heart-o" aria-hidden="true"  *ngIf="song.likes < 1"></i>
-         <i class="fa fa-heart" aria-hidden="true" *ngIf="song.likes >= 1"></i>
-            <i class="fa fa-plus" aria-hidden="true" (click)="addLike(song.$key, song.likes)"  ></i>
-            <i class="fa fa-minus" aria-hidden="true" (click)="removeLike(song.$key, song.likes)"></i>
-            
-            <span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   </span>
-            <i class="fa fa-play" [class.hidden]="song.play == 1" (click)="play(song.$key)" aria-hidden="true"></i>
-            <i class="fa fa-stop" [class.hidden]="song.play != 1" (click)="stop(song.$key)" aria-hidden="true"></i>
-            <span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   </span>
-            <i class="fa fa-trash-o" aria-hidden="true" (click)="deleteSong(song.$key)"></i>
-
-</td>
-</ng-container>
+ <tr  *ngFor="let song of songs | filter: term | sortBy: 'likes' ; let i  = index"
+      class="testClass" >
+  <app-song [song]="song" [permission]="'admin'"
+  *ngIf="song.likes > 0"
+  > </app-song>
   </tr>
 
+
 <!--Available -->
-  <tr class="text-center">
+  <tr class="text-center available">
     <td class="tb-header table-active" colspan="3">
     Available </td>
     </tr>
-
-
-
-  <tr *ngFor="let song of songs | filter: term; let i  = index"
-    [style.backgroundColor]="song.play == 1? 'skyblue' : 'transparent'">
-    <ng-container *ngIf="song.likes <= 0">
-<td >{{ song.title }}</td>
-<td >{{ song.artist }}</td>
-<td  [style.min-width]="'200px'" >{{ song.likes }}
-            <i class="fa fa-heart-o" aria-hidden="true"  *ngIf="song.likes < 1"></i>
-         <i class="fa fa-heart" aria-hidden="true" *ngIf="song.likes >= 1"></i>
-            <i class="fa fa-plus" aria-hidden="true" (click)="addLike(song.$key, song.likes)"  ></i>
-            <i class="fa fa-minus" aria-hidden="true" (click)="removeLike(song.$key, song.likes)"></i>
-            
-            <span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   </span>
-            <i class="fa fa-play" [class.hidden]="song.play == 1" (click)="play(song.$key)" aria-hidden="true"></i>
-            <i class="fa fa-stop" [class.hidden]="song.play != 1" (click)="stop(song.$key)" aria-hidden="true"></i>
-            <span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   </span>
-            <i class="fa fa-trash-o" aria-hidden="true" (click)="deleteSong(song.$key)"></i>
-
-</td>
-</ng-container>
+    
+ <tr  *ngFor="let song of songs | filter: term | sortBy: 'likes' ; let i  = index"
+      class="testClass" 
+       style="color: gray"
+      >
+  <app-song [song]="song" [permission]="'admin'"
+  *ngIf="song.likes <= 0"
+ 
+  > </app-song>
   </tr>
 
-
-
-
-
-
-
-
-  
   </tbody>
   </table>
 </div>
 
 
 
-
-
-
-
-
-
-<div>
-<form id="filter" class="pull-right">
-    <label>
-<i class="fa fa-search" aria-hidden="true"></i>
-    </label>
-    <input type="text" name="term" [(ngModel)]="term" />
-</form>
-</div>
-
-
-
+<!--Edit Songs -->
 <div class="container">
 <div class="row">
 <div class="col-md-12">
@@ -111,10 +47,39 @@
 <input type="text" placeholder="Artist" value="" name="newArtist" [(ngModel)]="newArtist" />
 <input type="number" name="newLikes" value="3" min="1" max="10" [(ngModel)]="newLikes">
 <button class="btn btn-success" (click)="addSong()">Add Song </button>
+<i class="fa fa-search" aria-hidden="true"></i>
+    <input type="text" name="term" placeholder="Seach" [(ngModel)]="term" />
+</div>
+</div>
+</div>
+<br>
+<!--Users -->
+<table class="table table-sm" >
+  <thead>
+  <th> User Name </th>
+  <th> Likes Available </th>
+  <th> Modify </th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of userList ; let i  = index"> 
 
-</div>
-</div>
-</div>
+<td>{{user.userName}}</td>
+<td>{{user.availableLikes}}</td>
+<td>
+  <button class="btn btn-sm btn-default" (click)="setLikes(user.$key, user.availableLikes)">Set Likes</button></td>
+    </tr>
+  </tbody>
+  <tr><td>
+    <input type="number" name="fillLikes" value="3" min="1" max="100" [(ngModel)]="fillLikes">
+    </td></tr>
+</table>
+
+
+
+
+
+
+
 
 
 
