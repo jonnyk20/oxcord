@@ -70,14 +70,11 @@ addLike(id: string, likes: number): void {
  this.db.list('/users/').update(this.storedUser.$key,{ availableLikes: this.availebleLikes -1 })
 }
 removeLike(id: string, likes: number): void {
-
  this.db.list('/songs/').update(id,{ likes: likes -1 });
 }
 
 
 play(nextSongKey, currentSongKey){
-
-
   this.db.list('/songs/').update(nextSongKey,{ play: 1 });
   this.db.list('/songs/').update(currentSongKey,{ play: 0 });
   return nextSongKey;
@@ -90,8 +87,8 @@ stop(id){
 
 addSong(){
 //this.db.list('/songs/').push({artist: "TestArtist", likes: 3, play: 0, title: "TestTitle"});
-
 }
+
 deleteSong(id: string){
  this.db.list('/songs').remove(id);
 }
