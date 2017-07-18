@@ -11,9 +11,11 @@ export class AuthService {
     user: Observable<firebase.User>;
     currentUser: any;
     users: Observable<any>;
+    userList: FirebaseListObservable<any[]>;
     token: string;
     authStatus: boolean;
     userStorage: any;
+    storedUser: any;
 
     constructor(private router: Router,
                 public afAuth: AngularFireAuth,
@@ -21,8 +23,6 @@ export class AuthService {
                     this.user = afAuth.authState as Observable<firebase.User>;
                     this.users = this.db.list('/users') as FirebaseListObservable<any>;
                 }
-
-
 
     signInFB() {
        this.afAuth.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider())
@@ -42,8 +42,6 @@ export class AuthService {
             //            ) 
             //     }
             // )
-            
-            
             .catch(
                 error => console.log(error)
             );
@@ -85,9 +83,26 @@ export class AuthService {
        return this.user
    }
 
+   getUsers(){
+
+    this.userList = this.db.list('/users'
+    ) as FirebaseListObservable<any>;
+     return this.userList;
+ }
+
+
     addUser(uid){
         this.db.list('/users/').push({userId: uid, userName: "User1", availableLikes: 10});
         
     }
+    setUser(user){
+            
+            this.storedUser = user;
+       
+    }
 
+    fillLikes(key, currentLikes, addition){
+        //console.log(key);
+        this.db.list('/users/').update(key,{ availableLikes: currentLikes + addition })
+    }
 }

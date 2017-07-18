@@ -6,7 +6,8 @@ import { Subject } from 'rxjs/Subject';
 import {Observable} from 'rxjs/Rx';
 
 import * as firebase from 'firebase/app';
-import { PlaylistService } from '../playlist.service'
+import { PlaylistService } from '../playlist.service';
+import { AuthService } from '../auth/auth.service';
 
 @Component({
   selector: 'app-admin',
@@ -16,14 +17,17 @@ import { PlaylistService } from '../playlist.service'
 export class AdminComponent implements OnInit {
 
 user: Observable<firebase.User>;
+userList: any;
 songs: any;
 CurrentSongKey: any;
 term: string = '';
 permission: string = 'admin';
+fillLikes: number = 3;
 
 
   constructor(private plService: PlaylistService,
-              public afAuth: AngularFireAuth) { 
+              public afAuth: AngularFireAuth,
+              public authService: AuthService) { 
                 this.user = afAuth.authState;
               }
 
@@ -37,6 +41,10 @@ permission: string = 'admin';
      this.CurrentSongKey = nowPlaying[0]['$key'];
         });
 
+     this.authService.getUsers().subscribe(
+       users => {
+          this.userList = users;
+       });
   }
 
 
@@ -51,7 +59,6 @@ removeLike(id: string, likes: number): void {
 play(id) {
   this.CurrentSongKey = 
   this.plService.play(id, this.CurrentSongKey);
- 
 }
 stop(id){
   this.plService.stop(id);
@@ -75,7 +82,10 @@ fblogin() {
     this.afAuth.auth.signOut();
   }
 
-  
+  setLikes(key, availableLikes){
+    //console.log(this.fillLikes)
+    this.authService.fillLikes(key, availableLikes, this.fillLikes);
+  }
 
 
 }

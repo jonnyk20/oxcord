@@ -1,10 +1,5 @@
 <!--We Made it.-->
 
-
-
-
-
-
 <div class="tablediv">
 <table class="table table-sm">
     <tbody>
@@ -44,19 +39,7 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+<!--Edit Songs -->
 <div class="container">
 <div class="row">
 <div class="col-md-12">
@@ -69,6 +52,34 @@
 </div>
 </div>
 </div>
+<br>
+<!--Users -->
+<table class="table table-sm" >
+  <thead>
+  <th> User Name </th>
+  <th> Likes Available </th>
+  <th> Modify </th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of userList ; let i  = index"> 
+
+<td>{{user.userName}}</td>
+<td>{{user.availableLikes}}</td>
+<td>
+  <button class="btn btn-sm btn-default" (click)="setLikes(user.$key, user.availableLikes)">Set Likes</button></td>
+    </tr>
+  </tbody>
+  <tr><td>
+    <input type="number" name="fillLikes" value="3" min="1" max="100" [(ngModel)]="fillLikes">
+    </td></tr>
+</table>
+
+
+
+
+
+
+
 
 
 

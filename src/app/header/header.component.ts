@@ -68,7 +68,8 @@ checkUser(){
             if (data.length == 0)  {
               this.addUser();
           } else {
-            console.log("Welcome "+data[0].userName+"!");
+            //console.log("Welcome "+data[0].userName+"!");
+            this.authService.setUser(data[0]);
             this.availableLikes = data[0].availableLikes;
             this.plService.availebleLikes =  data[0].availableLikes;
             }
