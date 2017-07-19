@@ -29,3 +29,58 @@ body {
     background-color: white;
     z-index: 99;
 }
+
+
+/* TEST Animation */
+.standard {
+    background-color: transparent;
+}
+
+.animatetest {
+    background-color: transparent;
+    -webkit-animation-name: example; 
+    -webkit-animation-duration: 2.5s; 
+    animation-name: example;
+    animation-duration: 2.5s;
+}
+
+
+/* Safari 4.0 - 8.0 */
+@-webkit-keyframes example {
+    0%   {background-color: transparent;}
+    50%  {background-color: lightcyan;}
+    100% {background-color: transparent;}
+}
+
+/* Standard syntax */
+@keyframes example {
+     0%   {background-color: transparent;}
+    50%  {background-color: lightcyan;}
+    100% {background-color: transparent;}
+}
+
+/*2nd Animation */
+/*2nd Animation */
+.animatetest2 {
+ 
+    background-color: transparent;
+    -webkit-animation-name: example; 
+    -webkit-animation-duration: 5s; 
+    animation-name: example2;
+    animation-duration: 5s;
+
+}
+
+ /*Safari 4.0 - 8.0 */
+@-webkit-keyframes example2 {
+    0%   {background-color: transparent;}
+    50%  {background-color: lightgreen;}
+    100% {background-color: transparent;}
+}
+
+/* Standard syntax */
+@keyframes example2 {
+     0%   {background-color: transparent;}
+    50%  {background-color: lightgreen;}
+    100% {background-color: transparent;}
+}

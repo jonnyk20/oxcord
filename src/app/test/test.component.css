@@ -25,3 +25,64 @@
     background-color: white;
     z-index: 99;
 }
+
+/* TEST Animation */
+.standard {
+    width: 100px;
+    height: 100px;
+    background-color: transparent;
+    border: solid 1px;
+}
+
+.animatetest {
+    width: 100px;
+    height: 100px;
+    background-color: transparent;
+    -webkit-animation-name: example; /* Safari 4.0 - 8.0 */
+    -webkit-animation-duration: 4s; /* Safari 4.0 - 8.0 */
+    animation-name: example;
+    animation-duration: 2s;
+    border: solid 1px;
+}
+
+
+/* Safari 4.0 - 8.0 */
+@-webkit-keyframes example {
+    0%   {background-color: transparent;}
+    50%  {background-color: lightgreen;}
+    100% {background-color: transparent;}
+}
+
+/* Standard syntax */
+@keyframes example {
+     0%   {background-color: transparent;}
+    50%  {background-color: lightgreen;}
+    100% {background-color: transparent;}
+}
+
+/*2nd Animation */
+/*2nd Animation */
+.animatetest2 {
+    width: 100px;
+    height: 100px;
+    background-color: transparent;
+    -webkit-animation-name: example; /* Safari 4.0 - 8.0 */
+    -webkit-animation-duration: 4s; /* Safari 4.0 - 8.0 */
+    animation-name: example2;
+    animation-duration: 2s;
+    border: solid 1px;
+}
+
+/* Safari 4.0 - 8.0 */
+@-webkit-keyframes example2 {
+    0%   {background-color: transparent;}
+    50%  {background-color: lightgreen;}
+    100% {background-color: transparent;}
+}
+
+/* Standard syntax */
+@keyframes example2 {
+     0%   {background-color: transparent;}
+    50%  {background-color: lightgreen;}
+    100% {background-color: transparent;}
+}

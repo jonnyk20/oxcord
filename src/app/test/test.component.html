@@ -3,16 +3,21 @@
 <div class="tablediv">
 <table class="table">
     
-    <tbody>
+    <tbody
+     
+    >
       <tr  *ngFor="let song of songs | sortBy: 'likes' ; let i  = index"
       class="testClass"
       >
   <app-song
   [song]="song"
   [permission]="permission"
+  [initiated]="initiated"
+
   > </app-song>
       </tr>
   </tbody>
   </table>
 </div>
+
 

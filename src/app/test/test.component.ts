@@ -11,6 +11,7 @@ import * as firebase from 'firebase/app';
 import { SongComponent } from '../song/song.component';
 
 import { trigger, state, style, transition, animate, keyframes, group } from '@angular/animations';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-test',
@@ -37,8 +38,6 @@ import { trigger, state, style, transition, animate, keyframes, group } from '@a
          style({
           'background-color': 'transparent'
         }),
-
-
       ])
 
         )
@@ -54,6 +53,9 @@ export class TestComponent implements OnInit {
   authStatus: boolean;
   state = 'normal';
   permission: string = 'admin';
+  classToggle: string = 'standard';
+  counter = 0;
+  initiated: boolean = false;
 
   constructor( private plService: PlaylistService,
                private authService: AuthService,
@@ -66,7 +68,7 @@ export class TestComponent implements OnInit {
         });   
     
     this.authStatus = this.authService.isAuthenticated();
-
+    setTimeout(() =>{  this.initiated = true; }, 10000);
   }
 
 highlight(){
@@ -93,6 +95,12 @@ highlight(){
    
   }
   
+  switch(){
+    if (this.counter == 0) {this.classToggle = 'animatetest'; this.counter++} else{
+
+    this.classToggle == 'animatetest'? this.classToggle = 'animatetest2' : this.classToggle = 'animatetest';
+    }
+  }
 
 
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, DoCheck, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input, DoCheck, AfterViewInit, AfterContentChecked } from '@angular/core';
 import { PlaylistService } from '../playlist.service'
 
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
@@ -48,21 +48,24 @@ import { trigger, state, style, transition, animate, keyframes, group } from '@a
   templateUrl: './song.component.html',
   styleUrls: ['./song.component.css']
 })
-export class SongComponent implements OnInit, DoCheck, AfterViewInit {
+export class SongComponent implements OnInit, DoCheck, AfterViewInit, AfterContentChecked {
   @Input() song: any;
   @Input() permission: any;
+  @Input() initiated: boolean;
   state = 'normal';
   user: Observable<firebase.User>;
   availableLikes:number;
   animation: number = 0;
   CurrentSongKey: any;
-  color: string = 'lightcyan'
+  color: string = 'lightcyan';
+  classToggle: string = 'animatetest';
+  counter = 0;
+  onLike = 0;
+
 
    constructor( private plService: PlaylistService,
                public afAuth: AngularFireAuth,
-             
                ) { 
-
                  this.user = afAuth.authState;
                }
 
@@ -71,16 +74,21 @@ export class SongComponent implements OnInit, DoCheck, AfterViewInit {
      .subscribe (nowPlaying => { 
      this.CurrentSongKey = nowPlaying[0]['$key'];
         });
-       
+
+     if (this.song.likes ==0 )  {this.classToggle = 'standard';}
   }
   ngAfterViewInit(){
+  
   }
 
   ngDoCheck() {
     this.availableLikes = this.plService.availebleLikes;
-    }
-  onAnimate(){
 
+  }
+  ngAfterContentChecked(){
+    
+  }
+  onAnimate(){
     this.state == 'normal' ? this.state = 'liked' : this.state = 'normal';
   }
  animationStarted(event){
@@ -91,11 +99,14 @@ export class SongComponent implements OnInit, DoCheck, AfterViewInit {
     console.log("No Mmore likes!");
   } else {
   this.plService.addLike(id, likes);
+  //this.onLike =1;
+
 }
 
 }
 
 removeLike(id: string, likes: number): void {
+ if (this.song.likes == 0 ) {console.log("no likes to remove"); return;}
  this.plService.removeLike(id, likes);
 }  
 
@@ -112,8 +123,14 @@ stop(id){
 console.log("Not Logged in");
 }
 
+ change(){
+   this.changeClass();
+  }
 
-
+  changeClass(){
+    //this.classToggle == 'animatetest'? this.classToggle = 'animatetest2' : this.classToggle = 'animatetest';
+    
+  }
 
 
 }
