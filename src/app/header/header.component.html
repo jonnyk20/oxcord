@@ -1,5 +1,4 @@
 <div style="text-align:center" class="topbox sticky-top">
- 
 
     <div class="row">
       
@@ -31,24 +30,18 @@
 
 
 <div class="row" > 
-
-      <div class="col-md-12 np " >
-      <div class="dark bg-info">
+      <div class="col-md-12 dark text-center" >
+          <div class="nowplaying ">
           <i class="fa fa-play" aria-hidden="true"></i>
-          Now Playing: "{{nowPlaying?.title}}" - "{{nowPlaying?.artist}}"</div>
- 
+          Now Playing: "{{nowPlaying?.title}}" - "{{nowPlaying?.artist}}"
+          </div>
+      </div>
 </div>
- 
-</div>
 
 
 
-
-<!--<div > USER: {{ user?.uid }} 
-     <button class="btn btn-default" (click)="addUser()"> Add User</button>
-</div>-->
-
-<table class="table table-sm">
+<div class="card">
+<table class="table table-sm table-curved">
 <thead>
       <tr>
         <th width="33%">Title</th>
@@ -57,6 +50,6 @@
       </tr>
 </thead>
 </table>
-
+</div>
 
 </div>

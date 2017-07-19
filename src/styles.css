@@ -8,11 +8,35 @@
 
 .available {
     color:gray;
+    background-color: lightgray;
+    border: solid 1px gray;
+    border-bottom: none;
+    
 }
 
 .upcoming {
     background: lightcyan;
 }
+
 .testClass {
     background-color: blue;
 }
+
+.hidden{
+    display:none;
+}
+
+.upcoming{
+    color: white;
+    background-color: #0687b1;
+    border:none;
+    padding: 0;
+}
+
+
+
+.available td, .upcoming td,.playlist {
+    border: none;
+    padding: 0;
+}
+

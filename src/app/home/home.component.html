@@ -1,12 +1,12 @@
 <!--We Made it.-->
     
 <div class="tablediv">
-<table class="table table-sm">
+<table class="table table-sm playlist">
     <tbody>
 
 <!--UPCOMING -->
-       <tr class="text-center">
-    <td class="tb-header table-active" colspan="3">
+       <tr class="text-center upcoming">
+    <td class="tb-header table-active upcoming" colspan="3">
     Upcoming </td>
 
  <tr  *ngFor="let song of songs | sortBy: 'likes' ; let i  = index"

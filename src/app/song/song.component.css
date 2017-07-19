@@ -3,10 +3,6 @@
     color:navy;
 }
 
-
-body {
- 
-}
 .starter-template {
   padding: 3rem 1.5rem;
   text-align: center;
@@ -30,11 +26,17 @@ body {
     z-index: 99;
 }
 
+.table td, .table th {
+    border:none;
+}
+
 
 /* TEST Animation */
 .standard {
     background-color: transparent;
+    border: solid 1px gray;
 }
+
 
 .animatetest {
     background-color: transparent;
@@ -42,20 +44,22 @@ body {
     -webkit-animation-duration: 2.5s; 
     animation-name: example;
     animation-duration: 2.5s;
+    border: solid 1px #0687b1;
+    color: #096fa2;
 }
 
 
 /* Safari 4.0 - 8.0 */
 @-webkit-keyframes example {
     0%   {background-color: transparent;}
-    50%  {background-color: lightcyan;}
+    50%  {background-color: lightblue;}
     100% {background-color: transparent;}
 }
 
 /* Standard syntax */
 @keyframes example {
      0%   {background-color: transparent;}
-    50%  {background-color: lightcyan;}
+    50%  {background-color: lightblue;}
     100% {background-color: transparent;}
 }
 
