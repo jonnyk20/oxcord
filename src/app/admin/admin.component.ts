@@ -23,6 +23,9 @@ CurrentSongKey: any;
 term: string = '';
 permission: string = 'admin';
 fillLikes: number = 3;
+newTitle: string;
+newArtist: string;
+newLikes: number;
 
 
   constructor(private plService: PlaylistService,
@@ -57,25 +60,31 @@ removeLike(id: string, likes: number): void {
 }
 
 play(id) {
+
   this.CurrentSongKey = 
   this.plService.play(id, this.CurrentSongKey);
+
 }
 stop(id){
+
   this.plService.stop(id);
+
 }
 
 addSong(){
  
- this.plService.addSong();
+ this.plService.addSong(this.newTitle, this.newArtist, this.newLikes);
 }
 
 deleteSong(id: string){
+
  this.plService.deleteSong(id);
+
 }
 
 fblogin() {
     this.afAuth.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider());
-  }
+}
 
  
   logout() {

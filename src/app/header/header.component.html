@@ -4,11 +4,11 @@
       
       <div class="col-md-12 text-center">
         
-            <h4 class="title text-left">
+            <h4 class="title text-left dark">
                 Oxcord
             </h4>
            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-             <span> Available Likes: {{availableLikes}}  <i class="fa fa-heart" aria-hidden="true"></i></span>           
+             <span class="dark"> Available Likes: {{availableLikes}}  <i class="fa fa-heart" aria-hidden="true"></i></span>           
 
 
             <span *ngIf="user" class="auth text-muted pull-right">
@@ -30,7 +30,7 @@
 
 
 <div class="row" > 
-      <div class="col-md-12 dark text-center" >
+      <div class="col-md-12 text-center" >
           <div class="nowplaying ">
           <i class="fa fa-play" aria-hidden="true"></i>
           Now Playing: "{{nowPlaying?.title}}" - "{{nowPlaying?.artist}}"

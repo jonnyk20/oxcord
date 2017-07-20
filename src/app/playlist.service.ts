@@ -68,7 +68,7 @@ addLike(id: string, likes: number): void {
  this.storedUser = this.authService.storedUser;
  this.db.list('/songs/').update(id,{ likes: likes +1 })
  this.db.list('/users/').update(this.storedUser.$key,{ availableLikes: this.availebleLikes -1 })
- //this.db.list('/songs/').update(id,{ highlight: true })
+ 
 }
 removeLike(id: string, likes: number): void {
  this.db.list('/songs/').update(id,{ likes: likes -1 });
@@ -86,8 +86,8 @@ stop(id){
 }
 
 
-addSong(){
-//this.db.list('/songs/').push({artist: "TestArtist", likes: 3, play: 0, title: "TestTitle"});
+addSong(newTitle, newArtist, newLikes){
+this.db.list('/songs/').push({artist: newArtist, likes: newLikes, play: 0, title: newTitle});
 }
 
 deleteSong(id: string){
