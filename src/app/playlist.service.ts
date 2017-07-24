@@ -2,8 +2,8 @@
 import { EventEmitter, Injectable, Output } from '@angular/core';
 import { Song } from './song.model';
 
-import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
-import { AngularFireAuthModule,AngularFireAuth} from 'angularfire2/auth';
+// import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
+// import { AngularFireAuthModule,AngularFireAuth} from 'angularfire2/auth';
 import { Subject } from 'rxjs/Subject';
 import {Observable} from 'rxjs/Rx';
 import { Http, Response } from '@angular/http';
@@ -16,16 +16,18 @@ import { AuthService } from './auth/auth.service';
 export class PlaylistService {
 
 user: Observable<firebase.User>;
-  songs: FirebaseListObservable<any[]>;
+  // songs: FirebaseListObservable<any[]>;
+  // nowPlaying: FirebaseListObservable<Song>;
   sizeSubject: Subject<any>;
-  nowPlaying: FirebaseListObservable<Song>;
+  
   np: any;
   npKey: any = null;
   availebleLikes: number = 5;
   storedUser: any;
 
-  constructor(private db: AngularFireDatabase, 
-              public afAuth: AngularFireAuth,
+  constructor(
+    // private db: AngularFireDatabase, 
+    //           public afAuth: AngularFireAuth,
               private http: Http,
               private authService: AuthService
               ) {};
@@ -33,27 +35,27 @@ user: Observable<firebase.User>;
 
  getSongs(){
 
-    this.songs = this.db.list('/songs', {
-      query: {
-        orderByChild: 'likes',  
-      }
-  }
-    ).map((array) => array.reverse())  as FirebaseListObservable<Song[]>;
+//     this.songs = this.db.list('/songs', {
+//       query: {
+//         orderByChild: 'likes',  
+//       }
+//   }
+//     ).map((array) => array.reverse())  as FirebaseListObservable<Song[]>;
 
 
-  return this.songs;
+//   return this.songs;
  }
   
   getNowPlaying(){
 
- this.nowPlaying = this.db.list('/songs', {
-      query: {
-        orderByChild: 'play',
-        equalTo: 1
-      }
-  })  as FirebaseListObservable<Song>      
+//  this.nowPlaying = this.db.list('/songs', {
+//       query: {
+//         orderByChild: 'play',
+//         equalTo: 1
+//       }
+//   })  as FirebaseListObservable<Song>      
 
-    return this.nowPlaying;
+//     return this.nowPlaying;
   }
  
 
@@ -61,50 +63,52 @@ user: Observable<firebase.User>;
 
 
     noLike(){
-console.log("Not Logged in");
+// console.log("Not Logged in");
 }
 
 addLike(id: string, likes: number): void {
- this.storedUser = this.authService.storedUser;
- this.db.list('/songs/').update(id,{ likes: likes +1 })
- this.db.list('/users/').update(this.storedUser.$key,{ availableLikes: this.availebleLikes -1 })
+//  this.storedUser = this.authService.storedUser;
+//  this.db.list('/songs/').update(id,{ likes: likes +1 })
+//  this.db.list('/users/').update(this.storedUser.$key,{ availableLikes: this.availebleLikes -1 })
  
 }
+
 removeLike(id: string, likes: number): void {
- this.db.list('/songs/').update(id,{ likes: likes -1 });
+//  this.db.list('/songs/').update(id,{ likes: likes -1 });
 }
 
 
 play(nextSongKey, currentSongKey){
-  this.db.list('/songs/').update(nextSongKey,{ play: 1 });
-  this.db.list('/songs/').update(currentSongKey,{ play: 0 });
-  return nextSongKey;
+//   this.db.list('/songs/').update(nextSongKey,{ play: 1 });
+//   this.db.list('/songs/').update(currentSongKey,{ play: 0 });
+//   return nextSongKey;
 }
 
 stop(id){
-  this.songs.update(id,{ play: 0 });
+//   this.songs.update(id,{ play: 0 });
 }
 
 
 addSong(newTitle, newArtist, newLikes){
-this.db.list('/songs/').push({artist: newArtist, likes: newLikes, play: 0, title: newTitle});
+// this.db.list('/songs/').push({artist: newArtist, likes: newLikes, play: 0, title: newTitle});
 }
 
 deleteSong(id: string){
- this.db.list('/songs').remove(id);
+//  this.db.list('/songs').remove(id);
 }
 
 
 
 fblogin() {
-    this.afAuth.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider());
+//     this.afAuth.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider());
   }
+
   glogin() {
-    this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+//     this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
   }
 
   logout() {
-    this.afAuth.auth.signOut();
+//     this.afAuth.auth.signOut();
   }
 
 }

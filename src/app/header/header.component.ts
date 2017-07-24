@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, DoCheck } from '@angular/core';
-import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
+// import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Subject } from 'rxjs/Subject';
@@ -32,25 +32,25 @@ export class HeaderComponent implements OnInit, DoCheck{
   }
 
    ngOnInit() {
-     this.plService.getNowPlaying()
-     .subscribe (nowPlaying => { 
-     this.nowPlaying = nowPlaying[0];
-        });
+    //  this.plService.getNowPlaying()
+    //  .subscribe (nowPlaying => { 
+    //  this.nowPlaying = nowPlaying[0];
+    //     });
 
-     this.authService.getUser().subscribe (user => { 
-     this.user = user;
+    //  this.authService.getUser().subscribe (user => { 
+    //  this.user = user;
      
-        });
+    //     });
 
-     this.availableLikes = this.plService.availebleLikes;
+    //  this.availableLikes = this.plService.availebleLikes;
     }
 
     ngDoCheck() {
-      if (this.userChecked == false && this.user) {
-      this.checkUser();
-      this.userChecked = true;
-    }
-    this.availableLikes = this.plService.availebleLikes;
+    //   if (this.userChecked == false && this.user) {
+    //   this.checkUser();
+    //   this.userChecked = true;
+    // }
+    // this.availableLikes = this.plService.availebleLikes;
     }
 
 noLike(){
@@ -61,35 +61,35 @@ checkUser(){
   // if (this.user){
   // console.log(this.user);}
   // else {console.log("Not logged in");}
-  if (!this.user){console.log("Not Signed in!")} else {
+  // if (!this.user){console.log("Not Signed in!")} else {
 
-    this.authService.checkUser(this.user.uid).subscribe(
-        data => { 
-            if (data.length == 0)  {
-              this.addUser();
-          } else {
-            //console.log("Welcome "+data[0].userName+"!");
-            this.authService.setUser(data[0]);
-            this.availableLikes = data[0].availableLikes;
-            this.plService.availebleLikes =  data[0].availableLikes;
-            }
-              }
-    )
-  }
+  //   this.authService.checkUser(this.user.uid).subscribe(
+  //       data => { 
+  //           if (data.length == 0)  {
+  //             this.addUser();
+  //         } else {
+  //           //console.log("Welcome "+data[0].userName+"!");
+  //           this.authService.setUser(data[0]);
+  //           this.availableLikes = data[0].availableLikes;
+  //           this.plService.availebleLikes =  data[0].availableLikes;
+  //           }
+  //             }
+  //   )
+  // }
 }
 
 fblogin() {
-  return this.authService.signInFB();
+  // return this.authService.signInFB();
  
 }
 
   logout() {
-    this.authService.logout();
+    // this.authService.logout();
   }
 
  addUser(){
-  const newId = this.user.uid
-  this.authService.addUser(newId);
+  // const newId = this.user.uid
+  // this.authService.addUser(newId);
  }
 
 

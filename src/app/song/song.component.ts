@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, DoCheck, AfterViewInit, AfterContentChecked } from '@angular/core';
 import { PlaylistService } from '../playlist.service'
 
-import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
-import { AngularFireAuthModule,AngularFireAuth} from 'angularfire2/auth';
+// import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
+// import { AngularFireAuthModule,AngularFireAuth} from 'angularfire2/auth';
 import { Subject } from 'rxjs/Subject';
 import {Observable} from 'rxjs/Rx';
 import { AuthService } from '../auth/auth.service';
@@ -64,18 +64,18 @@ export class SongComponent implements OnInit, DoCheck, AfterViewInit, AfterConte
 
 
    constructor( private plService: PlaylistService,
-               public afAuth: AngularFireAuth,
+              //  public afAuth: AngularFireAuth,
                ) { 
-                 this.user = afAuth.authState;
+                //  this.user = afAuth.authState;
                }
 
   ngOnInit() {
-      this.plService.getNowPlaying()
-     .subscribe (nowPlaying => { 
-     this.CurrentSongKey = nowPlaying[0]['$key'];
-        });
+    //   this.plService.getNowPlaying()
+    //  .subscribe (nowPlaying => { 
+    //  this.CurrentSongKey = nowPlaying[0]['$key'];
+    //     });
 
-     if (this.song.likes ==0 )  {this.classToggle = 'standard';}
+    //  if (this.song.likes ==0 )  {this.classToggle = 'standard';}
   }
   ngAfterViewInit(){
   

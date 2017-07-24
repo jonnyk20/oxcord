@@ -1,6 +1,6 @@
 import { Component, OnInit, DoCheck } from '@angular/core';
-import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
-import { AngularFireAuthModule,AngularFireAuth} from 'angularfire2/auth';
+// import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
+// import { AngularFireAuthModule,AngularFireAuth} from 'angularfire2/auth';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Subject } from 'rxjs/Subject';
 import {Observable} from 'rxjs/Rx';
@@ -22,15 +22,17 @@ user: Observable<firebase.User>;
   availableLikes:number;
    
 
-  constructor(private plService: PlaylistService, public afAuth: AngularFireAuth) {
-    this.user = afAuth.authState;
+  constructor(private plService: PlaylistService, 
+  // public afAuth: AngularFireAuth
+  ) {
+    // this.user = afAuth.authState;
    
   }
 
   ngOnInit() {
-    this.plService.getSongs() .subscribe (songs => { 
-     this.songs = songs;
-        });   
+    // this.plService.getSongs() .subscribe (songs => { 
+    //  this.songs = songs;
+    //     });   
   }
 
   
@@ -57,16 +59,16 @@ removeLike(id: string, likes: number): void {
 
 
 fblogin() {
-    this.afAuth.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider());
+    // this.afAuth.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider());
   }
 
 
   glogin() {
-    this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+    // this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
   }
 
   logout() {
-    this.afAuth.auth.signOut();
+    // this.afAuth.auth.signOut();
   }
   
 

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
-import { AngularFireAuthModule,AngularFireAuth} from 'angularfire2/auth';
+// import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
+// import { AngularFireAuthModule,AngularFireAuth} from 'angularfire2/auth';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Subject } from 'rxjs/Subject';
 import {Observable} from 'rxjs/Rx';
@@ -29,25 +29,25 @@ newLikes: number;
 
 
   constructor(private plService: PlaylistService,
-              public afAuth: AngularFireAuth,
+              // public afAuth: AngularFireAuth,
               public authService: AuthService) { 
-                this.user = afAuth.authState;
+                // this.user = afAuth.authState;
               }
 
   ngOnInit() {
-      this.plService.getSongs() .subscribe (songs => { 
-     this.songs = songs;
-        });   
+    //   this.plService.getSongs() .subscribe (songs => { 
+    //  this.songs = songs;
+    //     });   
 
-        this.plService.getNowPlaying()
-     .subscribe (nowPlaying => { 
-     this.CurrentSongKey = nowPlaying[0]['$key'];
-        });
+    //     this.plService.getNowPlaying()
+    //  .subscribe (nowPlaying => { 
+    //  this.CurrentSongKey = nowPlaying[0]['$key'];
+    //     });
 
-     this.authService.getUsers().subscribe(
-       users => {
-          this.userList = users;
-       });
+    //  this.authService.getUsers().subscribe(
+    //    users => {
+    //       this.userList = users;
+    //    });
   }
 
 
@@ -66,9 +66,7 @@ play(id) {
 
 }
 stop(id){
-
   this.plService.stop(id);
-
 }
 
 addSong(){
@@ -83,12 +81,12 @@ deleteSong(id: string){
 }
 
 fblogin() {
-    this.afAuth.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider());
+    // this.afAuth.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider());
 }
 
  
   logout() {
-    this.afAuth.auth.signOut();
+    // this.afAuth.auth.signOut();
   }
 
   setLikes(key, availableLikes){

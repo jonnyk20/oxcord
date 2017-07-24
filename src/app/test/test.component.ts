@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { PlaylistService } from '../playlist.service'
+import { PlaylistService } from '../playlist.service';
+import {Http, Response } from '@angular/http';
 
-import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
-import { AngularFireAuthModule,AngularFireAuth} from 'angularfire2/auth';
+// import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
+// import { AngularFireAuthModule,AngularFireAuth} from 'angularfire2/auth';
 import { Subject } from 'rxjs/Subject';
 import {Observable} from 'rxjs/Rx';
 import { AuthService } from '../auth/auth.service';
@@ -17,36 +18,9 @@ import { NgClass } from '@angular/common';
   selector: 'app-test',
   templateUrl: './test.component.html',
   styleUrls: ['./test.component.css'],
-  animations: [trigger('divState', [
-			state('normal', style({
-				'background-color': 'transparent'
-			})),
-			state('highlighted', style({
-				'background-color': 'transparent'
-			})),
-			transition('normal <=> highlighted', animate(1000,  keyframes([
-        
-        style({
-          'background-color': 'transparent'
-        }),
-         style({
-          'background-color': 'blue'
-        }),
-         style({
-          'background-color': 'blue'
-        }),
-         style({
-          'background-color': 'transparent'
-        }),
-      ])
 
-        )
-      
-      )
-		])
-    
-  ]
 })
+
 export class TestComponent implements OnInit {
   songs: any;
   nowPlaying: any;
@@ -59,47 +33,23 @@ export class TestComponent implements OnInit {
 
   constructor( private plService: PlaylistService,
                private authService: AuthService,
-              //  private usersService: UsersService
+              //  private usersService: UsersService,
+              private http: Http
                ) { }
 
   ngOnInit() {
-   this.plService.getSongs() .subscribe (songs => { 
-     this.songs = songs;
-        });   
-    
-    this.authStatus = this.authService.isAuthenticated();
-    setTimeout(() =>{  this.initiated = true; }, 10000);
+
   }
 
-highlight(){
-	  this.state == 'normal' ? this.state = 'highlighted' : this.state = 'normal';
 
-	}
 
-  normalize(){
-	  this.state = 'normal';
-	}
-  onAnimate(){
-    //this.highlight();
-    //this.state = 'highlighted';
-    this.state == 'normal' ? this.state = 'highlighted' : this.state = 'normal';
-  }
-
-  onRevert(){
-    this.state = 'normal';
-   
-  }
-  animationEnded(event){
-    
-    console.log("done!");
-   
-  }
-  
-  switch(){
-    if (this.counter == 0) {this.classToggle = 'animatetest'; this.counter++} else{
-
-    this.classToggle == 'animatetest'? this.classToggle = 'animatetest2' : this.classToggle = 'animatetest';
-    }
+  newData(){
+    return this.http.put('https://oxcord-f9409.firebaseio.com/testdb.json', {name3: 'value3'})
+    .subscribe(
+      (response: Response) => {
+        console.log(response);
+      }
+    );
   }
 
 
