@@ -12,40 +12,12 @@ import { SongComponent } from '../song/song.component';
 
 import { trigger, state, style, transition, animate, keyframes, group } from '@angular/animations';
 import { NgClass } from '@angular/common';
+import {Http, Response } from '@angular/http';
 
 @Component({
   selector: 'app-test',
   templateUrl: './test.component.html',
-  styleUrls: ['./test.component.css'],
-  animations: [trigger('divState', [
-			state('normal', style({
-				'background-color': 'transparent'
-			})),
-			state('highlighted', style({
-				'background-color': 'transparent'
-			})),
-			transition('normal <=> highlighted', animate(1000,  keyframes([
-        
-        style({
-          'background-color': 'transparent'
-        }),
-         style({
-          'background-color': 'blue'
-        }),
-         style({
-          'background-color': 'blue'
-        }),
-         style({
-          'background-color': 'transparent'
-        }),
-      ])
-
-        )
-      
-      )
-		])
-    
-  ]
+  styleUrls: ['./test.component.css']
 })
 export class TestComponent implements OnInit {
   songs: any;
@@ -56,10 +28,12 @@ export class TestComponent implements OnInit {
   classToggle: string = 'standard';
   counter = 0;
   initiated: boolean = false;
+  list:any;
 
   constructor( private plService: PlaylistService,
                private authService: AuthService,
               //  private usersService: UsersService
+              private http: Http
                ) { }
 
   ngOnInit() {
@@ -71,36 +45,41 @@ export class TestComponent implements OnInit {
     setTimeout(() =>{  this.initiated = true; }, 10000);
   }
 
-highlight(){
-	  this.state == 'normal' ? this.state = 'highlighted' : this.state = 'normal';
-
-	}
-
-  normalize(){
-	  this.state = 'normal';
-	}
-  onAnimate(){
-    //this.highlight();
-    //this.state = 'highlighted';
-    this.state == 'normal' ? this.state = 'highlighted' : this.state = 'normal';
+newData(){
+    return this.http.put('https://oxcord-f9409.firebaseio.com/testdb.json', {name1: 'value1'})
+    .subscribe(
+      (response: Response) => {
+        console.log(response);
+      }
+    );
   }
 
-  onRevert(){
-    this.state = 'normal';
-   
+  updateData(){
+    return this.http.patch('https://oxcord-f9409.firebaseio.com/testdb.json', {name1: 'value2'})
+    .subscribe(
+      (response: Response) => {
+        console.log(response);
+      }
+    );
   }
-  animationEnded(event){
-    
-    console.log("done!");
-   
-  }
-  
-  switch(){
-    if (this.counter == 0) {this.classToggle = 'animatetest'; this.counter++} else{
 
-    this.classToggle == 'animatetest'? this.classToggle = 'animatetest2' : this.classToggle = 'animatetest';
-    }
+  getData(){
+    return this.http.get('https://oxcord-f9409.firebaseio.com/testdb.json')
+    .subscribe(
+      (response: Response) => {
+        this.list = response.json();
+        console.log(this.list);
+      }
+    );
   }
+
+
+
+
+
+
+
+
 
 
 }
